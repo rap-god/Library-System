@@ -101,15 +101,15 @@ public class MemberScreen extends JFrame {
 		contentPane.add(lblRegister);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
-		lblFirstName.setBounds(73, 92, 86, 15);
+		lblFirstName.setBounds(46, 90, 86, 15);
 		contentPane.add(lblFirstName);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
-		lblLastName.setBounds(73, 119, 86, 15);
+		lblLastName.setBounds(46, 118, 86, 15);
 		contentPane.add(lblLastName);
 		
 		JLabel lblNewLabel = new JLabel("Your E-mail:");
-		lblNewLabel.setBounds(73, 157, 86, 15);
+		lblNewLabel.setBounds(46, 158, 86, 15);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Re-Enter E-Mail:");
@@ -121,7 +121,7 @@ public class MemberScreen extends JFrame {
 		contentPane.add(lblNewPassword);
 		
 		JLabel lblReenterPassword = new JLabel("Re-Enter Password:");
-		lblReenterPassword.setBounds(12, 240, 147, 15);
+		lblReenterPassword.setBounds(46, 240, 102, 17);
 		contentPane.add(lblReenterPassword);
 		
 		txtFFN = new JTextField();
@@ -159,7 +159,7 @@ public class MemberScreen extends JFrame {
 		contentPane.add(table);
 		
 		JLabel lblGender = new JLabel("Gender:");
-		lblGender.setBounds(89, 277, 70, 15);
+		lblGender.setBounds(46, 278, 70, 15);
 		contentPane.add(lblGender);
 		
 		JComboBox comboBox = new JComboBox();
@@ -167,7 +167,7 @@ public class MemberScreen extends JFrame {
 		contentPane.add(comboBox);
 		
 		JLabel lblBirthday = new JLabel("Birthday:");
-		lblBirthday.setBounds(89, 316, 70, 15);
+		lblBirthday.setBounds(46, 316, 70, 15);
 		contentPane.add(lblBirthday);
 		
 		JComboBox comboBox_1 = new JComboBox();
@@ -183,7 +183,7 @@ public class MemberScreen extends JFrame {
 		contentPane.add(comboBox_3);
 		
 		JLabel lblAddress = new JLabel("Address:");
-		lblAddress.setBounds(89, 356, 70, 15);
+		lblAddress.setBounds(46, 357, 70, 15);
 		contentPane.add(lblAddress);
 		
 		textField = new JTextField();
