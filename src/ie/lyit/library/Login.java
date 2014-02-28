@@ -1,76 +1,21 @@
 package ie.lyit.library;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-
-import java.awt.Color;
-
+import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-/**
- * The first window seen by the user after launching the application.
- * @author Sean Morris - l00095752
- *
- */
 public class Login extends JFrame {
-	private JTextField txtfUsername;
-	private JTextField txtFPassword;
-	public Login() {
-		setTitle("Login");
-		
-		JLabel lblPleaseLoginUsing = new JLabel("Please login using your username and password");
-		lblPleaseLoginUsing.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		getContentPane().add(lblPleaseLoginUsing, BorderLayout.NORTH);
-		
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
-		
-		JLabel lblUsername = new JLabel("Username ");
-		lblUsername.setBounds(57, 30, 91, 14);
-		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
-		panel.add(lblUsername);
-		
-		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(57, 55, 79, 14);
-		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
-		panel.add(lblPassword);
-		
-		JButton btnRegister = new JButton("Register");
-		btnRegister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Registration register = new Registration();
-				register.setVisible(true);
-			}
-		});
-		btnRegister.setBounds(47, 98, 89, 23);
-		panel.add(btnRegister);
-		
-		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(204, 98, 89, 23);
-		panel.add(btnLogin);
-		
-		txtfUsername = new JTextField();
-		txtfUsername.setBounds(158, 29, 135, 20);
-		panel.add(txtfUsername);
-		txtfUsername.setColumns(10);
-		
-		txtFPassword = new JTextField();
-		txtFPassword.setBounds(158, 54, 135, 20);
-		panel.add(txtFPassword);
-		txtFPassword.setColumns(10);
-	}
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -79,24 +24,59 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-		            // Set system look and feel ...
-					UIManager.setLookAndFeel(
-	        		UIManager.getSystemLookAndFeelClassName());
-				} 
-				
-				catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-				
-				try {
-					HomeWindow frame = new HomeWindow();
+					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
 			}
 		});
-	
 	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Login() {
+		setResizable(false);
+		setTitle("Login/Register");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 350, 200);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel label = new JLabel("Username ");
+		label.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label.setBounds(47, 45, 91, 14);
+		contentPane.add(label);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(148, 44, 135, 20);
+		contentPane.add(textField);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(148, 69, 135, 20);
+		contentPane.add(textField_1);
+		
+		JLabel label_1 = new JLabel("Password");
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_1.setBounds(47, 70, 79, 14);
+		contentPane.add(label_1);
+		
+		JButton button = new JButton("Register");
+		button.setBounds(37, 113, 89, 23);
+		contentPane.add(button);
+		
+		JButton button_1 = new JButton("Login");
+		button_1.setBounds(194, 113, 89, 23);
+		contentPane.add(button_1);
+		
+		JLabel lblNewLabel = new JLabel("Please login using your username and password.");
+		lblNewLabel.setBounds(37, 0, 263, 32);
+		contentPane.add(lblNewLabel);
+	}
+
 }
