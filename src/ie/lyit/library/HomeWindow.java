@@ -13,6 +13,8 @@ import java.awt.Color;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * The first window seen by the user after launching the application.
@@ -98,6 +100,12 @@ public class HomeWindow extends JFrame {
 		contentPane.add(btnBrowse);
 		
 		JButton btnLogin = new JButton("Log in / Register");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Login loginScreen = new Login();
+				loginScreen.setVisible(true);
+			}
+		});
 		btnLogin.setBounds(241, 124, 130, 29);
 		contentPane.add(btnLogin);
 		

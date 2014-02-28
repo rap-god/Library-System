@@ -26,6 +26,7 @@ import javax.swing.JComboBox;
  *
  */
 public class Registration extends JFrame {
+	
 
 	private JPanel contentPane;
 	// Constant to indicate there are 3 houses
@@ -71,7 +72,7 @@ public class Registration extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MemberScreen() {
+	public Registration() {
 		setResizable(false);
 		setTitle("Library");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -200,5 +201,6 @@ public class Registration extends JFrame {
 		textField_2.setColumns(10);
 		textField_2.setBounds(205, 413, 143, 19);
 		contentPane.add(textField_2);
+	
 	}
 }

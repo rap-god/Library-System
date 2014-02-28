@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The first window seen by the user after launching the application.
@@ -25,6 +27,7 @@ public class Login extends JFrame {
 	private JTextField txtfUsername;
 	private JTextField txtFPassword;
 	public Login() {
+		setTitle("Login");
 		
 		JLabel lblPleaseLoginUsing = new JLabel("Please login using your username and password");
 		lblPleaseLoginUsing.setFont(new Font("Tahoma", Font.ITALIC, 14));
@@ -35,16 +38,22 @@ public class Login extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblUsername = new JLabel("Username ");
-		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUsername.setBounds(57, 30, 91, 14);
+		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
 		panel.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblPassword.setBounds(57, 55, 79, 14);
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
 		panel.add(lblPassword);
 		
 		JButton btnRegister = new JButton("Register");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Registration register = new Registration();
+				register.setVisible(true);
+			}
+		});
 		btnRegister.setBounds(47, 98, 89, 23);
 		panel.add(btnRegister);
 		
