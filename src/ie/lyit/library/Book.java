@@ -12,6 +12,7 @@ public class Book {
 	private String title;
 	private int publishedYear;
 	private String genre;
+	private int loanID;
 	private String description;
 	private String publisher;
 	int quantity;
@@ -120,7 +121,7 @@ public class Book {
 	}
 
 	/**
-	 * Retrieve the book's genre.
+	 * Retrieve the books genre.
 	 * @return The book's genre.
 	 */
 	public String getGenre() {
@@ -128,11 +129,27 @@ public class Book {
 	}
 
 	/**
-	 * Set the book's genre.
+	 * Set the books genre.
 	 * @param genre The book's genre.
 	 */
 	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+	
+	/**
+	 * Retrieve the book's loan ID
+	 * @return The Loan ID
+	 */
+	public int getLoanID() {
+		return loanID;
+	}
+	
+	/**
+	 * Set the books loanID to the specified value
+	 * @param loanID The new loan ID
+	 */
+	public void setLoanID(int loanID) {
+		this.loanID = loanID;
 	}
 
 	/**
