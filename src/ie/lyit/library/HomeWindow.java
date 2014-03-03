@@ -60,7 +60,7 @@ public class HomeWindow extends JFrame {
 		setResizable(false);
 		setTitle("Library");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 399, 553);
+		setBounds(100, 100, 459, 559);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,12 +69,12 @@ public class HomeWindow extends JFrame {
 		
 		JLabel lblHeader = new JLabel("");
 		lblHeader.setIcon(new ImageIcon(HomeWindow.class.getResource("/images/header.png")));
-		lblHeader.setBounds(0, 0, 404, 60);
+		lblHeader.setBounds(0, 0, 453, 60);
 		contentPane.add(lblHeader);
 		
 		JPanel pnlSeparator = new JPanel();
 		pnlSeparator.setBackground(new Color(65, 105, 225));
-		pnlSeparator.setBounds(0, 60, 394, 19);
+		pnlSeparator.setBounds(0, 60, 453, 19);
 		contentPane.add(pnlSeparator);
 		
 		JPanel pnlHeader = new JPanel();
@@ -83,20 +83,20 @@ public class HomeWindow extends JFrame {
 		
 		JLabel lblBookImage = new JLabel("");
 		lblBookImage.setIcon(new ImageIcon(HomeWindow.class.getResource("/images/placeholder.jpg")));
-		lblBookImage.setBounds(29, 164, 342, 313);
+		lblBookImage.setBounds(52, 164, 342, 313);
 		contentPane.add(lblBookImage);
 		
 		lblSearch = new JTextField();
-		lblSearch.setBounds(29, 90, 243, 23);
+		lblSearch.setBounds(52, 90, 243, 23);
 		contentPane.add(lblSearch);
 		lblSearch.setColumns(10);
 		
 		JButton btnSearch = new JButton("Search");
-		btnSearch.setBounds(282, 90, 89, 23);
+		btnSearch.setBounds(305, 90, 89, 23);
 		contentPane.add(btnSearch);
 		
 		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(29, 124, 130, 29);
+		btnBrowse.setBounds(52, 124, 130, 29);
 		contentPane.add(btnBrowse);
 		
 		JButton btnLogin = new JButton("Log in / Register");
@@ -106,15 +106,19 @@ public class HomeWindow extends JFrame {
 				loginScreen.setVisible(true);
 			}
 		});
-		btnLogin.setBounds(241, 124, 130, 29);
+		btnLogin.setBounds(264, 124, 130, 29);
 		contentPane.add(btnLogin);
 		
 		JButton btnViewBook = new JButton("View Book");
-		btnViewBook.setBounds(29, 488, 130, 29);
+		btnViewBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnViewBook.setBounds(52, 488, 130, 29);
 		contentPane.add(btnViewBook);
 		
 		JButton lblBorrow = new JButton("Borrow Book");
-		lblBorrow.setBounds(241, 488, 130, 29);
+		lblBorrow.setBounds(264, 488, 130, 29);
 		contentPane.add(lblBorrow);
 	}
 }
