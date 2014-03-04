@@ -6,34 +6,51 @@ import java.sql.*;
  * Class for initializing the database connection and handling the reads/writes.
  */
 public class Database {
-
-	public static void main(String args[]) {
-		
-		Connection con; 
-		Statement stmt;
-		ResultSet rs;
+	private Connection connection;
+	private Statement stmt;
+	private ResultSet results;
+	
+	public Database() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			con = DriverManager.getConnection("jdbc:sqlite:library.sqlite"); // Connect to library.sqlite (should be in local dir)
-			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM BOOK"); // Selects everything in the BOOK table
-
-			// Print out fields
-			while (rs.next()) {
-				int ISBN = rs.getInt("ISBN");
-				String author = rs.getString("Author");
-				String title = rs.getString("Title");
-				int year = rs.getInt("Year_Published");
-				System.out.println("ISBN: " + ISBN);
-				System.out.println("AUTHOR: " + author);
-				System.out.println("TITLE: " + title);
-				System.out.println("YEAR: " + year);
-			}
-			con.close();
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			System.exit(0);
+			connection = DriverManager.getConnection("jdbc:sqlite:library.sqlite"); // Connect to library.sqlite (should be in local dir)
+			stmt = connection.createStatement();
 		}
-
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
+	
+	public Book getBookByTitle(String title) throws SQLException {
+		results = stmt.executeQuery("SELECT * FROM BOOK WHERE TITLE = '" +title +"'");
+		int ISBN = 0;
+		String author = new String();
+		String bookTitle = new String();
+		int publishedYear = 0;
+		String genre = new String("Novel");
+		//int loanID = 0;
+		String description = new String();
+		String publisher = new String();
+		
+		while(results.next()) {
+			ISBN = results.getInt("ISBN");
+			author = results.getString("Author");
+			bookTitle = results.getString("Title");
+			publishedYear = results.getInt("Year_Published");
+			//genre = results.getString("Genre");
+			//loanID = results.getInt("LoanID");
+			description = results.getString("Description");
+			publisher = results.getString("Publisher");
+		}
+		
+		Book b1 = new Book(ISBN, author, bookTitle, publishedYear, genre, description, publisher);
+		
+		//b1.setLoanID(loanID);
+		return b1;
+	}
+	/*
+	public void addBook(Book b) {
+		stmt.executeUpdate("")
+	}*/
 }

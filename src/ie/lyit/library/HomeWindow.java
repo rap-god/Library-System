@@ -49,8 +49,8 @@ public class HomeWindow extends JFrame {
 					e.printStackTrace();
 				}
 				
-			}
-		});
+			} 
+		}); 
 	}
 
 	/**
@@ -104,6 +104,7 @@ public class HomeWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Login loginScreen = new Login();
 				loginScreen.setVisible(true);
+				setVisible(false);
 			}
 		});
 		btnLogin.setBounds(264, 124, 130, 29);
@@ -112,6 +113,9 @@ public class HomeWindow extends JFrame {
 		JButton btnViewBook = new JButton("View Book");
 		btnViewBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ViewBook frame = new ViewBook();
+				frame.setVisible(true);
+				hide();
 			}
 		});
 		btnViewBook.setBounds(52, 488, 130, 29);
@@ -120,5 +124,6 @@ public class HomeWindow extends JFrame {
 		JButton lblBorrow = new JButton("Borrow Book");
 		lblBorrow.setBounds(264, 488, 130, 29);
 		contentPane.add(lblBorrow);
+		
 	}
 }

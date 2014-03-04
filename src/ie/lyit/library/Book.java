@@ -26,6 +26,10 @@ public class Book {
 	 * @param genre Book's Genre.
 	 * @param publisher Book's publisher.
 	 */
+	
+	public Book() {
+		// Default empty constructor ...
+	}
 	public Book(int ISBN, String author, String title, int publishedYear, String genre, String publisher) {
 		this.ISBN = ISBN;
 		this.author = author;

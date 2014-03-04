@@ -3,9 +3,11 @@ package ie.lyit.library;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -51,6 +53,14 @@ public class ViewBook extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewBook() {
+		Database data = new Database();
+		Book b = new Book();
+		try {
+			b = data.getBookByTitle("Grapes of Wrath");
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		setResizable(false);
 		setTitle("[BOOK TITLE]");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,21 +79,21 @@ public class ViewBook extends JFrame {
 		contentPane.add(lblTitle);
 		
 		txtGrapes = new JTextField();
-		txtGrapes.setText("Grapes ....");
+		txtGrapes.setText(b.getTitle());
 		txtGrapes.setEditable(false);
 		txtGrapes.setBounds(52, 34, 153, 20);
 		contentPane.add(txtGrapes);
 		txtGrapes.setColumns(10);
 		
 		txtSteinbeck = new JTextField();
-		txtSteinbeck.setText("Steinbeck");
+		txtSteinbeck.setText(b.getAuthor());
 		txtSteinbeck.setEditable(false);
 		txtSteinbeck.setColumns(10);
 		txtSteinbeck.setBounds(52, 65, 153, 20);
 		contentPane.add(txtSteinbeck);
 		
 		textField_2 = new JTextField();
-		textField_2.setText("1939");
+		textField_2.setText(String.valueOf(b.getPublishedYear()));
 		textField_2.setEditable(false);
 		textField_2.setColumns(10);
 		textField_2.setBounds(52, 96, 153, 20);
@@ -98,7 +108,7 @@ public class ViewBook extends JFrame {
 		contentPane.add(lblYear);
 		
 		JTextArea txtrDescription = new JTextArea();
-		txtrDescription.setText("This is for the book's description ..................................");
+		txtrDescription.setText(b.getDescription());
 		txtrDescription.setBounds(10, 246, 458, 261);
 		contentPane.add(txtrDescription);
 		
@@ -124,5 +134,6 @@ public class ViewBook extends JFrame {
 		Image scaledImage = img.getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon icon = new ImageIcon(scaledImage);
 		lblImage.setIcon(icon);
+		
 	}
 }
