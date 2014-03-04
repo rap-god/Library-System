@@ -47,7 +47,12 @@ public class Database {
 		Book b1 = new Book(ISBN, author, bookTitle, publishedYear, genre, description, publisher);
 		
 		//b1.setLoanID(loanID);
+		this.closeConnection();
 		return b1;
+	}
+	
+	public void closeConnection() throws SQLException {
+		connection.close();
 	}
 	/*
 	public void addBook(Book b) {

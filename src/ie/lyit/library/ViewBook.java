@@ -20,6 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.UIManager;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewBook extends JFrame {
 
@@ -62,26 +65,27 @@ public class ViewBook extends JFrame {
 			e1.printStackTrace();
 		}
 		setResizable(false);
-		setTitle("[BOOK TITLE]");
+		setTitle(b.getTitle());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 494, 614);
+		setBounds(100, 100, 497, 683);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblImage = new JLabel("");
-		lblImage.setBounds(215, 11, 234, 201);
+		lblImage.setBounds(215, 92, 234, 201);
 		contentPane.add(lblImage);
 		
 		JLabel lblTitle = new JLabel("Title:");
-		lblTitle.setBounds(10, 34, 32, 21);
+		lblTitle.setBounds(10, 115, 32, 21);
 		contentPane.add(lblTitle);
 		
 		txtGrapes = new JTextField();
 		txtGrapes.setText(b.getTitle());
 		txtGrapes.setEditable(false);
-		txtGrapes.setBounds(52, 34, 153, 20);
+		txtGrapes.setBounds(52, 115, 153, 20);
 		contentPane.add(txtGrapes);
 		txtGrapes.setColumns(10);
 		
@@ -89,41 +93,48 @@ public class ViewBook extends JFrame {
 		txtSteinbeck.setText(b.getAuthor());
 		txtSteinbeck.setEditable(false);
 		txtSteinbeck.setColumns(10);
-		txtSteinbeck.setBounds(52, 65, 153, 20);
+		txtSteinbeck.setBounds(52, 146, 153, 20);
 		contentPane.add(txtSteinbeck);
 		
 		textField_2 = new JTextField();
 		textField_2.setText(String.valueOf(b.getPublishedYear()));
 		textField_2.setEditable(false);
 		textField_2.setColumns(10);
-		textField_2.setBounds(52, 96, 153, 20);
+		textField_2.setBounds(52, 177, 153, 20);
 		contentPane.add(textField_2);
 		
 		JLabel lblAuthor = new JLabel("Author:");
-		lblAuthor.setBounds(10, 66, 42, 21);
+		lblAuthor.setBounds(10, 147, 42, 21);
 		contentPane.add(lblAuthor);
 		
 		JLabel lblYear = new JLabel("Year:");
-		lblYear.setBounds(10, 96, 32, 21);
+		lblYear.setBounds(10, 177, 32, 21);
 		contentPane.add(lblYear);
 		
 		JTextArea txtrDescription = new JTextArea();
 		txtrDescription.setText(b.getDescription());
-		txtrDescription.setBounds(10, 246, 458, 261);
+		txtrDescription.setBounds(10, 327, 458, 261);
+		txtrDescription.setLineWrap(true);
 		contentPane.add(txtrDescription);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(124, 518, 110, 45);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				HomeWindow home = new HomeWindow();
+				home.setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setBounds(124, 599, 110, 45);
 		contentPane.add(btnBack);
 		
 		JButton btnBorrow = new JButton("Borrow");
-		btnBorrow.setBounds(244, 518, 110, 45);
+		btnBorrow.setBounds(244, 599, 110, 45);
 		contentPane.add(btnBorrow);
 		
 		BufferedImage img = null;
 
 		try {
-			//img = ImageIO.read(new File("images/placeholder.jpg"));
 			img = ImageIO.read(ClassLoader.getSystemResource("images/placeholder.jpg"));
 		}
 		
@@ -134,6 +145,16 @@ public class ViewBook extends JFrame {
 		Image scaledImage = img.getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH);
 		ImageIcon icon = new ImageIcon(scaledImage);
 		lblImage.setIcon(icon);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(ViewBook.class.getResource("/images/header.png")));
+		label.setBounds(0, 0, 491, 60);
+		contentPane.add(label);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(65, 105, 225));
+		panel.setBounds(0, 60, 491, 19);
+		contentPane.add(panel);
 		
 	}
 }

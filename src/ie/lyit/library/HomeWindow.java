@@ -105,6 +105,7 @@ public class HomeWindow extends JFrame {
 				Login loginScreen = new Login();
 				loginScreen.setVisible(true);
 				setVisible(false);
+				dispose();
 			}
 		});
 		btnLogin.setBounds(264, 124, 130, 29);
@@ -115,7 +116,7 @@ public class HomeWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				ViewBook frame = new ViewBook();
 				frame.setVisible(true);
-				hide();
+				dispose();
 			}
 		});
 		btnViewBook.setBounds(52, 488, 130, 29);
