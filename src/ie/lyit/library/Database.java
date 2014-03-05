@@ -76,8 +76,11 @@ public class Database {
 	public void closeConnection() throws SQLException {
 		connection.close();
 	}
-	/*
-	public void addBook(Book b) {
-		stmt.executeUpdate("")
+	
+	
+	/*public void addBook(Book b) {
+		int ISBN = b.getISBN();
+		String
+		stmt.executeUpdate("INSERT INTO BOOK VALUES(" +ISBN +", " +));
 	}*/
 }
