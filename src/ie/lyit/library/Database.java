@@ -28,8 +28,7 @@ public class Database {
 		String author = new String();
 		String bookTitle = new String();
 		int publishedYear = 0;
-		String genre = new String("Novel");
-		//int loanID = 0;
+		String genre = new String();
 		String description = new String();
 		String publisher = new String();
 		
@@ -38,16 +37,39 @@ public class Database {
 			author = results.getString("Author");
 			bookTitle = results.getString("Title");
 			publishedYear = results.getInt("Year_Published");
-			//genre = results.getString("Genre");
-			//loanID = results.getInt("LoanID");
+			genre = results.getString("Genre");
 			description = results.getString("Description");
 			publisher = results.getString("Publisher");
 		}
 		
 		Book b1 = new Book(ISBN, author, bookTitle, publishedYear, genre, description, publisher);
 		
-		//b1.setLoanID(loanID);
-		this.closeConnection();
+		return b1;
+	}
+	
+	public Book getBookByISBN(int ISBN) throws SQLException {
+		results = stmt.executeQuery("SELECT * FROM BOOK WHERE ISBN = '" +ISBN +"'");
+		int bookISBN = 0;
+		String author = new String();
+		String bookTitle = new String();
+		int publishedYear = 0;
+		String genre = new String();
+		String description = new String();
+		String publisher = new String();
+		
+		while(results.next()) {
+			bookISBN = results.getInt("ISBN");
+			author = results.getString("Author");
+			bookTitle = results.getString("Title");
+			publishedYear = results.getInt("Year_Published");
+			genre = results.getString("Genre");
+			description = results.getString("Description");
+			publisher = results.getString("Publisher");
+		}
+		
+		Book b1 = new Book(bookISBN, author, bookTitle, publishedYear, genre, description, publisher);
+		
+
 		return b1;
 	}
 	

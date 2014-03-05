@@ -104,7 +104,6 @@ public class HomeWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Login loginScreen = new Login();
 				loginScreen.setVisible(true);
-				setVisible(false);
 				dispose();
 			}
 		});
