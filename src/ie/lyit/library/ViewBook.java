@@ -61,7 +61,6 @@ public class ViewBook extends JFrame {
 		try {
 			b = data.getBookByTitle("Grapes of Wrath");
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		setResizable(false);
@@ -112,6 +111,7 @@ public class ViewBook extends JFrame {
 		contentPane.add(lblYear);
 		
 		JTextArea txtrDescription = new JTextArea();
+		txtrDescription.setEditable(false);
 		txtrDescription.setText(b.getDescription());
 		txtrDescription.setBounds(10, 327, 458, 261);
 		txtrDescription.setLineWrap(true);

@@ -32,6 +32,7 @@ public class MyAccount extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+		            // Set system look and feel ...
 					UIManager.setLookAndFeel(
 	        		UIManager.getSystemLookAndFeelClassName());
 				} 
@@ -39,7 +40,6 @@ public class MyAccount extends JFrame{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
-				
 				try {
 					MyAccount frame = new MyAccount();
 					frame.setVisible(true);
@@ -96,6 +96,7 @@ public class MyAccount extends JFrame{
 				public void actionPerformed(ActionEvent arg0) {
 					int n = JOptionPane.showConfirmDialog(null, "Leave This Page?", "Confirmation", JOptionPane.YES_NO_OPTION);
 	    			  if(n ==JOptionPane.YES_OPTION){
+    				    Member.logOut();
 	    				HomeWindow homePage = new HomeWindow();
 	    				dispose();
 	    				homePage.setVisible(true);

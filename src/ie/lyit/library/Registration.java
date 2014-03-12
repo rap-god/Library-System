@@ -3,6 +3,7 @@ package ie.lyit.library;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
@@ -16,6 +17,8 @@ import javax.swing.JButton;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+
 import javax.swing.border.*;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
@@ -33,14 +36,10 @@ public class Registration extends JFrame {
 	private final int NUM_OF_PICS = 3;
 	private JTextField txtFFN;
 	private JTextField txtFLN;
-	private JTextField txtFEM;
-	private JTextField txtFREM;
-	private JTextField txtFNPass;
-	private JTextField txtFRPass;
+	private JTextField txtPassword;
+	private JTextField txtComparePassword;
 	private JTable table;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtUsername;
 
 	/**
 	 * Launch the application.
@@ -73,10 +72,11 @@ public class Registration extends JFrame {
 	 * Create the frame.
 	 */
 	public Registration() {
+		final Database data = new Database();
 		setResizable(false);
-		setTitle("Library");
+		setTitle("Library - Register new user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 399, 553);
+		setBounds(100, 100, 396, 305);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -97,110 +97,90 @@ public class Registration extends JFrame {
 		pnlHeader.setBounds(0, 0, 394, 80);
 		contentPane.add(pnlHeader);
 		
-		JButton lblRegister = new JButton("Register");
-		lblRegister.setBounds(12, 488, 373, 29);
-		contentPane.add(lblRegister);
+		JButton btnRegister = new JButton("Register");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (txtPassword.getText().equals(txtComparePassword.getText())) {
+						data.registerUser(txtUsername.getText(), txtPassword.getText());
+						Member newMember = new Member(txtUsername.getText(), txtPassword.getText());
+						JOptionPane.showMessageDialog(null, "Registration Successful!");
+						MemberScreen frame = new MemberScreen();
+						frame.setVisible(true);
+						dispose();
+					}
+					
+					else {
+						JOptionPane.showMessageDialog(null, "Passwords don't match.");
+					}
+				} catch (SQLException e1) {
+
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnRegister.setBounds(25, 237, 138, 29);
+		contentPane.add(btnRegister);
 		
 		JLabel lblFirstName = new JLabel("First Name:");
-		lblFirstName.setBounds(46, 90, 86, 15);
+		lblFirstName.setBounds(46, 177, 86, 15);
 		contentPane.add(lblFirstName);
 		
 		JLabel lblLastName = new JLabel("Last Name:");
-		lblLastName.setBounds(46, 118, 86, 15);
+		lblLastName.setBounds(46, 205, 86, 15);
 		contentPane.add(lblLastName);
 		
-		JLabel lblNewLabel = new JLabel("Your E-mail:");
-		lblNewLabel.setBounds(46, 158, 86, 15);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Re-Enter E-Mail:");
-		lblNewLabel_1.setBounds(46, 184, 125, 15);
-		contentPane.add(lblNewLabel_1);
-		
 		JLabel lblNewPassword = new JLabel("New Password:");
-		lblNewPassword.setBounds(46, 211, 113, 15);
+		lblNewPassword.setBounds(46, 120, 113, 15);
 		contentPane.add(lblNewPassword);
 		
 		JLabel lblReenterPassword = new JLabel("Re-Enter Password:");
-		lblReenterPassword.setBounds(46, 240, 102, 17);
+		lblReenterPassword.setBounds(46, 149, 102, 17);
 		contentPane.add(lblReenterPassword);
 		
 		txtFFN = new JTextField();
-		txtFFN.setBounds(205, 90, 143, 19);
+		txtFFN.setBounds(205, 177, 143, 19);
 		contentPane.add(txtFFN);
 		txtFFN.setColumns(10);
 		
 		txtFLN = new JTextField();
-		txtFLN.setBounds(205, 117, 143, 19);
+		txtFLN.setBounds(205, 204, 143, 19);
 		contentPane.add(txtFLN);
 		txtFLN.setColumns(10);
 		
-		txtFEM = new JTextField();
-		txtFEM.setBounds(205, 155, 143, 19);
-		contentPane.add(txtFEM);
-		txtFEM.setColumns(10);
+		txtPassword = new JTextField();
+		txtPassword.setBounds(205, 118, 143, 19);
+		contentPane.add(txtPassword);
+		txtPassword.setColumns(10);
 		
-		txtFREM = new JTextField();
-		txtFREM.setBounds(205, 182, 143, 19);
-		contentPane.add(txtFREM);
-		txtFREM.setColumns(10);
-		
-		txtFNPass = new JTextField();
-		txtFNPass.setBounds(205, 209, 143, 19);
-		contentPane.add(txtFNPass);
-		txtFNPass.setColumns(10);
-		
-		txtFRPass = new JTextField();
-		txtFRPass.setBounds(205, 238, 143, 19);
-		contentPane.add(txtFRPass);
-		txtFRPass.setColumns(10);
+		txtComparePassword = new JTextField();
+		txtComparePassword.setBounds(205, 147, 143, 19);
+		contentPane.add(txtComparePassword);
+		txtComparePassword.setColumns(10);
 		
 		table = new JTable();
 		table.setBounds(104, 304, 1, 1);
 		contentPane.add(table);
 		
-		JLabel lblGender = new JLabel("Gender:");
-		lblGender.setBounds(46, 278, 70, 15);
-		contentPane.add(lblGender);
+		txtUsername = new JTextField();
+		txtUsername.setColumns(10);
+		txtUsername.setBounds(205, 90, 143, 19);
+		contentPane.add(txtUsername);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(205, 270, 143, 24);
-		contentPane.add(comboBox);
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setBounds(46, 90, 86, 15);
+		contentPane.add(lblUsername);
 		
-		JLabel lblBirthday = new JLabel("Birthday:");
-		lblBirthday.setBounds(46, 316, 70, 15);
-		contentPane.add(lblBirthday);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(204, 311, 42, 24);
-		contentPane.add(comboBox_1);
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(258, 311, 42, 24);
-		contentPane.add(comboBox_2);
-		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(306, 311, 42, 24);
-		contentPane.add(comboBox_3);
-		
-		JLabel lblAddress = new JLabel("Address:");
-		lblAddress.setBounds(46, 357, 70, 15);
-		contentPane.add(lblAddress);
-		
-		textField = new JTextField();
-		textField.setBounds(205, 354, 143, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(205, 385, 143, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(205, 413, 143, 19);
-		contentPane.add(textField_2);
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login window = new Login();
+				window.setVisible(true);
+				dispose();
+			}
+		});
+		btnCancel.setBounds(205, 237, 143, 29);
+		contentPane.add(btnCancel);
 	
 	}
 }

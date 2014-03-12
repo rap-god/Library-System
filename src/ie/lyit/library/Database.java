@@ -8,13 +8,14 @@ import java.sql.*;
 public class Database {
 	private Connection connection;
 	private Statement stmt;
-	private ResultSet results;
+	private Statement updateStmt;
 	
 	public Database() {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:library.sqlite"); // Connect to library.sqlite (should be in local dir)
 			stmt = connection.createStatement();
+			updateStmt = connection.createStatement();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -23,7 +24,7 @@ public class Database {
 	}
 	
 	public Book getBookByTitle(String title) throws SQLException {
-		results = stmt.executeQuery("SELECT * FROM BOOK WHERE TITLE = '" +title +"'");
+		ResultSet results = stmt.executeQuery("SELECT * FROM BOOK WHERE TITLE = '" +title +"'");
 		int ISBN = 0;
 		String author = new String();
 		String bookTitle = new String();
@@ -48,7 +49,7 @@ public class Database {
 	}
 	
 	public Book getBookByISBN(int ISBN) throws SQLException {
-		results = stmt.executeQuery("SELECT * FROM BOOK WHERE ISBN = '" +ISBN +"'");
+		ResultSet results = stmt.executeQuery("SELECT * FROM BOOK WHERE ISBN = '" +ISBN +"'");
 		int bookISBN = 0;
 		String author = new String();
 		String bookTitle = new String();
@@ -69,7 +70,6 @@ public class Database {
 		
 		Book b1 = new Book(bookISBN, author, bookTitle, publishedYear, genre, description, publisher);
 		
-
 		return b1;
 	}
 	
@@ -77,6 +77,34 @@ public class Database {
 		connection.close();
 	}
 	
+	public void registerUser(String userName, String password) throws SQLException {
+		updateStmt.executeUpdate("INSERT INTO Member (MemberID, Password)"
+				+ " VALUES('" +userName +"', '"+ password +"');");
+		closeConnection();
+	}
+	
+	public boolean validLogin(String userName, String password) throws SQLException {
+		ResultSet results;
+		String userPass = new String();
+		try {
+			results = stmt.executeQuery("SELECT * FROM MEMBER WHERE MemberID = '" +userName +"';");
+			userPass = results.getString("Password");
+		} catch (SQLException e) {
+			closeConnection();
+			return false;
+		}
+		
+		
+		if (password.equals(userPass)) {
+			closeConnection();
+			return true;
+		}
+		
+		else {
+			closeConnection();
+			return false;
+		}
+	}
 	
 	/*public void addBook(Book b) {
 		int ISBN = b.getISBN();

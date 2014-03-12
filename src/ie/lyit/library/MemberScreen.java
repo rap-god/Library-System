@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MemberScreen extends JFrame {
 	public MemberScreen() {
@@ -51,6 +53,13 @@ public class MemberScreen extends JFrame {
 		contentPane.add(btnBrowse);
 		
 		JButton btnMyAccount = new JButton("My Account");
+		btnMyAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MyAccount window = new MyAccount();
+				window.setVisible(true);
+				dispose();
+			}
+		});
 		btnMyAccount.setBounds(241, 124, 130, 29);
 		contentPane.add(btnMyAccount);
 		
