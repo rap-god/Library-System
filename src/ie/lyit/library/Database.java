@@ -86,14 +86,6 @@ public class Database {
 	}
 	
 	/**
-	 * Closes the connection to the SQLite database.
-	 * @throws SQLException
-	 */
-	public void closeConnection() throws SQLException {
-		connection.close();
-	}
-	
-	/**
 	 * Create a new member with the given parameters.
 	 * @param userName Username selected by the user.
 	 * @param password User's password.
@@ -139,11 +131,12 @@ public class Database {
 		
 		closeConnection();
 	}
-	/*public void addBook(Book b) {
-		int ISBN = b.getISBN();
-		String
-		stmt.executeUpdate("INSERT INTO BOOK VALUES(" +ISBN +", " +));
-	}
 	
-	*/
+	/**
+	 * Closes the connection to the SQLite database.
+	 * @throws SQLException
+	 */
+	public void closeConnection() throws SQLException {
+		connection.close();
+	}
 }
