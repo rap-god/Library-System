@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import javax.swing.border.*;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
+import javax.swing.JPasswordField;
 
 /**
  * The first window seen by the user after launching the application.
@@ -36,10 +37,10 @@ public class Registration extends JFrame {
 	private final int NUM_OF_PICS = 3;
 	private JTextField txtFFN;
 	private JTextField txtFLN;
-	private JTextField txtPassword;
-	private JTextField txtComparePassword;
 	private JTable table;
 	private JTextField txtUsername;
+	private JPasswordField txtPassword;
+	private JPasswordField txtComparePassword;
 
 	/**
 	 * Launch the application.
@@ -148,16 +149,6 @@ public class Registration extends JFrame {
 		contentPane.add(txtFLN);
 		txtFLN.setColumns(10);
 		
-		txtPassword = new JTextField();
-		txtPassword.setBounds(205, 118, 143, 19);
-		contentPane.add(txtPassword);
-		txtPassword.setColumns(10);
-		
-		txtComparePassword = new JTextField();
-		txtComparePassword.setBounds(205, 147, 143, 19);
-		contentPane.add(txtComparePassword);
-		txtComparePassword.setColumns(10);
-		
 		table = new JTable();
 		table.setBounds(104, 304, 1, 1);
 		contentPane.add(table);
@@ -181,6 +172,14 @@ public class Registration extends JFrame {
 		});
 		btnCancel.setBounds(205, 237, 143, 29);
 		contentPane.add(btnCancel);
+		
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(205, 117, 143, 20);
+		contentPane.add(txtPassword);
+		
+		txtComparePassword = new JPasswordField();
+		txtComparePassword.setBounds(205, 147, 143, 20);
+		contentPane.add(txtComparePassword);
 	
 	}
 }

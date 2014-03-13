@@ -18,12 +18,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.awt.Color;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUsername;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 
 	/**
 	 * Launch the application.
@@ -50,13 +52,14 @@ public class Login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 365, 280);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblHeading = new JLabel("User Login");
 		lblHeading.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblHeading.setBounds(120, 11, 88, 27);
+		lblHeading.setBounds(132, 11, 88, 27);
 		contentPane.add(lblHeading);
 		
 		JLabel lblUsername = new JLabel("Username:");
@@ -73,11 +76,6 @@ public class Login extends JFrame {
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPassword.setBounds(25, 94, 75, 27);
 		contentPane.add(lblPassword);
-		
-		txtPassword = new JTextField();
-		txtPassword.setColumns(10);
-		txtPassword.setBounds(110, 99, 204, 20);
-		contentPane.add(txtPassword);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -96,7 +94,9 @@ public class Login extends JFrame {
 						JOptionPane.showMessageDialog(null, "Incorrect Login details!");
 					}
 				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
+
+					e1.printStackTrace();
+				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
 			}
@@ -122,6 +122,9 @@ public class Login extends JFrame {
 		});
 		btnRegister.setBounds(119, 208, 89, 23);
 		contentPane.add(btnRegister);
+		
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(110, 99, 204, 20);
+		contentPane.add(txtPassword);
 	}
-
 }

@@ -102,8 +102,9 @@ public class Database {
 	 * @param userName Username entered.
 	 * @param password Password entered.
 	 * @return True or false depending on whether the details are correct or not.
+	 * @throws SQLException 
 	 */
-	public boolean validLogin(String userName, String password) {
+	public boolean validLogin(String userName, String password) throws SQLException {
 		ResultSet results;
 		String userPass = new String();
 		try {
@@ -114,6 +115,7 @@ public class Database {
 			return password.equals(userPass);
 			
 		} catch (SQLException e) {
+			closeConnection();
 			return false;
 		}
 		
