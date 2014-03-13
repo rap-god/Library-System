@@ -129,6 +129,10 @@ public class ViewBook extends JFrame {
 		contentPane.add(btnBack);
 		
 		JButton btnBorrow = new JButton("Borrow");
+		btnBorrow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnBorrow.setBounds(244, 599, 110, 45);
 		contentPane.add(btnBorrow);
 		

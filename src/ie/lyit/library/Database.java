@@ -23,6 +23,12 @@ public class Database {
 		
 	}
 	
+	/**
+	 * Searches the database for a book based on its title. Returns the book if a match has been found.
+	 * @param title The title to search for.
+	 * @return The book, if a match has been found.
+	 * @throws SQLException
+	 */
 	public Book getBookByTitle(String title) throws SQLException {
 		ResultSet results = stmt.executeQuery("SELECT * FROM BOOK WHERE TITLE = '" +title +"'");
 		int ISBN = 0;
@@ -48,6 +54,12 @@ public class Database {
 		return b1;
 	}
 	
+	/**
+	 * Search the database for a book that matches the given ISBN, and return it.
+	 * @param ISBN The ISBN to search for.
+	 * @return The book with the matching ISBN.
+	 * @throws SQLException
+	 */
 	public Book getBookByISBN(int ISBN) throws SQLException {
 		ResultSet results = stmt.executeQuery("SELECT * FROM BOOK WHERE ISBN = '" +ISBN +"'");
 		int bookISBN = 0;
@@ -73,42 +85,65 @@ public class Database {
 		return b1;
 	}
 	
+	/**
+	 * Closes the connection to the SQLite database.
+	 * @throws SQLException
+	 */
 	public void closeConnection() throws SQLException {
 		connection.close();
 	}
 	
+	/**
+	 * Create a new member with the given parameters.
+	 * @param userName Username selected by the user.
+	 * @param password User's password.
+	 * @throws SQLException
+	 */
 	public void registerUser(String userName, String password) throws SQLException {
 		updateStmt.executeUpdate("INSERT INTO Member (MemberID, Password)"
 				+ " VALUES('" +userName +"', '"+ password +"');");
 		closeConnection();
 	}
 	
-	public boolean validLogin(String userName, String password) throws SQLException {
+	/**
+	 * Verifies the login details entered by a user on the login screen.
+	 * @param userName Username entered.
+	 * @param password Password entered.
+	 * @return True or false depending on whether the details are correct or not.
+	 */
+	public boolean validLogin(String userName, String password) {
 		ResultSet results;
 		String userPass = new String();
 		try {
 			results = stmt.executeQuery("SELECT * FROM MEMBER WHERE MemberID = '" +userName +"';");
 			userPass = results.getString("Password");
+			closeConnection();
+			
+			return password.equals(userPass);
+			
 		} catch (SQLException e) {
-			closeConnection();
 			return false;
 		}
 		
 		
-		if (password.equals(userPass)) {
-			closeConnection();
-			return true;
-		}
-		
-		else {
-			closeConnection();
-			return false;
-		}
 	}
 	
+	/**
+	 * Create a new loan record in the database, using the fields provided in the given Loan object.
+	 * @param l Loan object to be added to the database.
+	 * @throws SQLException
+	 */
+	public void createLoan(Loan l) throws SQLException {
+		updateStmt.executeUpdate("INSERT INTO Loan(LoanID, LoanDate, DueDate, MemberID, ISBN)"
+				+ "VALUES('" +Loan.getLoanID() +"', '" +l.getLoanDate() +"', '" +l.getDueDate() +"', '" +l.getMemberID() +"'," +l.getISBN() +"'" );
+		
+		closeConnection();
+	}
 	/*public void addBook(Book b) {
 		int ISBN = b.getISBN();
 		String
 		stmt.executeUpdate("INSERT INTO BOOK VALUES(" +ISBN +", " +));
-	}*/
+	}
+	
+	*/
 }

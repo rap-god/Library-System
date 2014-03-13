@@ -50,8 +50,6 @@ public class MyAccount extends JFrame{
 			}
 		});
 		
-		
-		// TODO Auto-generated method stub
 
 	}
 	public MyAccount(){
