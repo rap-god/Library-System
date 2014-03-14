@@ -55,8 +55,8 @@ public class Member {
 	public void setLoanID(int loanID) {
 		this.loanID = loanID;
 	}
-	
-	public boolean isLoggedOn() {
+
+	public static boolean isLoggedOn() {
 		return loggedOn;
 	}
 	
