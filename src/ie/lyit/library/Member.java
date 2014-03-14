@@ -8,6 +8,7 @@ public class Member {
 	private int reservationID;
 	private int loanID;
 	static boolean loggedOn;
+	private static Member currentMember;
 	
 	//Constructors
 	public Member(String i , String n){
@@ -22,6 +23,7 @@ public class Member {
 		reservationID = r;
 		loanID = l;
 		loggedOn = true;
+		currentMember = new Member(i, n, r, l);
 	}
 	
 	public String getMemberID() {
@@ -56,6 +58,9 @@ public class Member {
 		this.loanID = loanID;
 	}
 
+	public static Member getCurrentMember() {
+		return currentMember;
+	}
 	public static boolean isLoggedOn() {
 		return loggedOn;
 	}

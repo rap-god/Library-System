@@ -2,6 +2,7 @@ package ie.lyit.library;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Class for instantiating a new Loan object. 
@@ -21,22 +22,12 @@ public class Loan {
 	 * Constructor for creating a Loan object
 	 * @param loanDate The date the loan was taken out.
 	 */
-	public Loan() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		loanDate = dateFormat.format(loanDate);
-		loanID++;
-	}
-	
-	/**
-	 * Creates a Loan object, with some instance fields defined.
-	 * @param loanDate Date the loan was taken out.
-	 * @param dueDate Date that the loan will be due.
-	 * @param memberID ID of the member who took out the loan.
-	 * @param ISBN ISBN of the book that is being taken out on loan.
-	 */
-	public Loan(String loanDate, String dueDate, String memberID, int ISBN) {
-		this();
-		this.dueDate = dueDate;
+	public Loan(String memberID, int ISBN) {
+		Calendar currentDate = Calendar.getInstance();
+		SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
+		loanDate = formatter.format(currentDate.getTime());
+		currentDate.add(Calendar.DATE, 14);
+		dueDate = formatter.format("dd/MM/yyyy");
 		this.memberID = memberID;
 		this.ISBN = ISBN;
 	}
