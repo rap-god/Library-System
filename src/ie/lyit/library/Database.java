@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  */
 public class Database {
 	private Connection connection;
-	private Statement stmt;
+	private static Statement stmt;
 	private Statement updateStmt;
 	
 	public Database() {
@@ -209,8 +209,8 @@ public void addBook(int isbn, String author, String title,String date, String de
 			
 	}
 
-	
-	public ArrayList<Book> select()throws SQLException{
+	public static ArrayList<Book> books = new ArrayList<Book>();
+	public static ArrayList<Book> select()throws SQLException{
 		
 		ResultSet results = stmt.executeQuery("SELECT * FROM BOOK");
 		int bookISBN = 0;
@@ -220,7 +220,7 @@ public void addBook(int isbn, String author, String title,String date, String de
 		String genre = new String();
 		String description = new String();
 		String publisher = new String();
-		ArrayList<Book> temp = new ArrayList<Book>();
+		//ArrayList<Book> temp = new ArrayList<Book>();
 		
 		while(results.next()) {
 			bookISBN = results.getInt("ISBN");
@@ -231,11 +231,15 @@ public void addBook(int isbn, String author, String title,String date, String de
 			description = results.getString("Description");
 			publisher = results.getString("Publisher");
 			
-			temp.add(new Book(bookISBN, author, bookTitle, publishedYear, genre, description, publisher));
+			books.add(new Book(bookISBN, author, bookTitle, publishedYear, genre, description, publisher));
 		}
 		
-		return temp;
+		return books;
 	}
+	
+	
+
+	
 	
 	public void removeBook(int isbn){
 		try{

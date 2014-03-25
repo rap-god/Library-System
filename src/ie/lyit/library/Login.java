@@ -83,7 +83,7 @@ public class Login extends JFrame {
 					if (data.validLogin(txtUsername.getText(), txtPassword.getText())) {
 						Member m = new Member(txtUsername.getText(), txtPassword.getText());
 						JOptionPane.showMessageDialog(null, "Success!!!");
-						MemberScreen window = new MemberScreen();
+						MainScreen window = new MainScreen();
 						window.setVisible(true);
 						dispose();
 					}
