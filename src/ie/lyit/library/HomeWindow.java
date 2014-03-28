@@ -18,9 +18,8 @@ import java.awt.event.ActionEvent;
 
 /**
  * The first window seen by the user after launching the application.
- * 
  * @author Sean Morris - l00095752
- * 
+ *
  */
 public class HomeWindow extends JFrame {
 
@@ -34,24 +33,24 @@ public class HomeWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					// Set system look and feel ...
-					UIManager.setLookAndFeel(UIManager
-							.getSystemLookAndFeelClassName());
-				}
-
+		            // Set system look and feel ...
+					UIManager.setLookAndFeel(
+	        		UIManager.getSystemLookAndFeelClassName());
+				} 
+				
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
-
+				
 				try {
 					HomeWindow frame = new HomeWindow();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
-			}
-		});
+				
+			} 
+		}); 
 	}
 
 	/**
@@ -67,41 +66,39 @@ public class HomeWindow extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		JLabel lblHeader = new JLabel("");
-		lblHeader.setIcon(new ImageIcon(HomeWindow.class
-				.getResource("/images/header.png")));
+		lblHeader.setIcon(new ImageIcon(HomeWindow.class.getResource("/images/header.png")));
 		lblHeader.setBounds(0, 0, 453, 60);
 		contentPane.add(lblHeader);
-
+		
 		JPanel pnlSeparator = new JPanel();
 		pnlSeparator.setBackground(new Color(65, 105, 225));
 		pnlSeparator.setBounds(0, 60, 453, 19);
 		contentPane.add(pnlSeparator);
-
+		
 		JPanel pnlHeader = new JPanel();
 		pnlHeader.setBounds(0, 0, 394, 80);
 		contentPane.add(pnlHeader);
-
+		
 		JLabel lblBookImage = new JLabel("");
-		lblBookImage.setIcon(new ImageIcon(HomeWindow.class
-				.getResource("/images/placeholder.jpg")));
+		lblBookImage.setIcon(new ImageIcon(HomeWindow.class.getResource("/images/placeholder.jpg")));
 		lblBookImage.setBounds(52, 164, 342, 313);
 		contentPane.add(lblBookImage);
-
+		
 		lblSearch = new JTextField();
 		lblSearch.setBounds(52, 90, 243, 23);
 		contentPane.add(lblSearch);
 		lblSearch.setColumns(10);
-
+		
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setBounds(305, 90, 89, 23);
 		contentPane.add(btnSearch);
-
+		
 		JButton btnBrowse = new JButton("Browse");
 		btnBrowse.setBounds(52, 124, 130, 29);
 		contentPane.add(btnBrowse);
-
+		
 		JButton btnLogin = new JButton("Log in / Register");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -112,7 +109,7 @@ public class HomeWindow extends JFrame {
 		});
 		btnLogin.setBounds(264, 124, 130, 29);
 		contentPane.add(btnLogin);
-
+		
 		JButton btnViewBook = new JButton("View Book");
 		btnViewBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -123,10 +120,10 @@ public class HomeWindow extends JFrame {
 		});
 		btnViewBook.setBounds(52, 488, 130, 29);
 		contentPane.add(btnViewBook);
-
+		
 		JButton lblBorrow = new JButton("Borrow Book");
 		lblBorrow.setBounds(264, 488, 130, 29);
 		contentPane.add(lblBorrow);
-
+		
 	}
 }

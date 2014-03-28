@@ -67,7 +67,7 @@ public class OverdueLoans extends JFrame {
 
 				try {
 
-					HomeWindow frame = new HomeWindow();
+					MainScreen frame = new MainScreen();
 
 					frame.setVisible(true);
 
@@ -110,7 +110,7 @@ public class OverdueLoans extends JFrame {
 
 		JLabel lblHeader = new JLabel("");
 
-		lblHeader.setIcon(new ImageIcon(HomeWindow.class
+		lblHeader.setIcon(new ImageIcon(MainScreen.class
 				.getResource("/images/header.png")));
 
 		lblHeader.setBounds(0, 0, 453, 60);

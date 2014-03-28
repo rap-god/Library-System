@@ -1,8 +1,11 @@
 package ie.lyit.library;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Calendar;
+
+import javax.swing.JOptionPane;
 
 /**
  * Class for instantiating a new Loan object. 
@@ -11,7 +14,9 @@ import java.util.Calendar;
  */
 
 public class Loan {
-	static int loanID = 0;
+	Database data = new Database();
+	private int lastLoanID;
+	private int loanID;
 	private String loanDate;
 	private String dueDate;
 	private String returnDate;
@@ -23,11 +28,24 @@ public class Loan {
 	 * @param loanDate The date the loan was taken out.
 	 */
 	public Loan(String memberID, int ISBN) {
-		Calendar currentDate = Calendar.getInstance();
-		SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy");
-		loanDate = formatter.format(currentDate.getTime());
-		currentDate.add(Calendar.DATE, 14);
-		dueDate = formatter.format("dd/MM/yyyy");
+		Date currentDate = new Date();
+		Date incrementDate = new Date();
+		Calendar c = Calendar.getInstance();
+		c.setTime(currentDate);
+		c.add(Calendar.DATE, 14);
+		incrementDate = c.getTime();
+		this.loanDate = new SimpleDateFormat("dd-MM-yyyy").format(currentDate);
+		this.dueDate = new SimpleDateFormat("dd-MM-yyyy").format(incrementDate);
+		this.memberID = memberID;
+		this.ISBN = ISBN;
+		lastLoanID = data.getLastLoanID();
+		loanID = ++lastLoanID;
+	}
+	
+	public Loan(int loanID, String loanDate, String dueDate, String memberID, int ISBN) {
+		this.loanID = loanID;
+		this.loanDate = loanDate;
+		this.dueDate = dueDate;
 		this.memberID = memberID;
 		this.ISBN = ISBN;
 	}
@@ -36,7 +54,7 @@ public class Loan {
 	 * Retrieve the unique loan ID
 	 * @return The loan's ID
 	 */
-	public static int getLoanID() {
+	public int getLoanID() {
 		return loanID;
 	}
 
@@ -96,10 +114,23 @@ public class Loan {
 		return ISBN;
 	}
 	
+	public Book getLoanedBook(int ISBN) {
+		
+		try {
+			Database data = new Database();
+			return data.getBookByISBN(ISBN);
+		}
+		
+		catch(SQLException e) {
+			JOptionPane.showMessageDialog(null, "Book Not found!");
+			return null;
+		}
+		
+	}
+	
 	@Override
 	public String toString() {
-		return "Loan [loanDate=" + loanDate + ", dueDate=" + dueDate
-				+ ", returnDate=" + returnDate + "]";
+		return loanID +": " +loanDate + " Due:" + dueDate + " " +getLoanedBook(ISBN).getTitle();
 	}
 
 }

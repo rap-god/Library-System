@@ -15,6 +15,7 @@ public class Book {
 	private String description;
 	private String publisher;
 	int quantity;
+	private String imgPath;
 	
 	/**
 	 * Constructor for instantiating a Book object. (Description not included)
@@ -29,14 +30,14 @@ public class Book {
 	public Book() {
 		// Default empty constructor ...
 	}
-	public Book(int ISBN, String author, String title, int publishedYear, String genre, String publisher) {
+	public Book(int ISBN, String author, String title, int publishedYear, String genre, String publisher, int q) {
 		this.ISBN = ISBN;
 		this.author = author;
 		this.title = title;
 		this.publishedYear = publishedYear;
 		this.genre = genre;
 		this.publisher = publisher;
-		this.quantity = 1;
+		this.quantity = q;
 	}
 	
 	/**

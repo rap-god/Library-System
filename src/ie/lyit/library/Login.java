@@ -81,7 +81,8 @@ public class Login extends JFrame {
 				
 				try {
 					if (data.validLogin(txtUsername.getText(), txtPassword.getText())) {
-						Member m = new Member(txtUsername.getText(), txtPassword.getText());
+						Member m = new Member(txtUsername.getText());
+						Member.setCurrentMember(m);
 						JOptionPane.showMessageDialog(null, "Success!!!");
 						MainScreen window = new MainScreen();
 						window.setVisible(true);
@@ -90,12 +91,13 @@ public class Login extends JFrame {
 					
 					else {
 						JOptionPane.showMessageDialog(null, "Incorrect Login details!");
+						data.closeConnection();
+						txtUsername.setText("");
+						txtPassword.setText("");
 					}
 				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

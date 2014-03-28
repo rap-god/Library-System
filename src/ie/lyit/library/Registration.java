@@ -104,7 +104,7 @@ public class Registration extends JFrame {
 				try {
 					if (txtPassword.getText().equals(txtComparePassword.getText())) {
 						data.registerUser(txtUsername.getText(), txtPassword.getText());
-						Member newMember = new Member(txtUsername.getText(), txtPassword.getText());
+						Member newMember = new Member(txtUsername.getText());
 						JOptionPane.showMessageDialog(null, "Registration Successful!");
 						MemberScreen frame = new MemberScreen();
 						frame.setVisible(true);

@@ -117,16 +117,8 @@ public class ViewBook extends JFrame {
 		txtrDescription.setLineWrap(true);
 		contentPane.add(txtrDescription);
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				HomeWindow home = new HomeWindow();
-				home.setVisible(true);
-				dispose();
-			}
-		});
-		btnBack.setBounds(124, 599, 110, 45);
-		contentPane.add(btnBack);
+		
+		
 		
 		JButton btnBorrow = new JButton("Borrow");
 		btnBorrow.addActionListener(new ActionListener() {
