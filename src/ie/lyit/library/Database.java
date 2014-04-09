@@ -171,6 +171,7 @@ public class Database {
 	public boolean validLogin(String userName, String password) throws SQLException {
 		ResultSet results;
 		String userPass = new String();
+		
 		try {
 			results = stmt.executeQuery("SELECT * FROM MEMBER WHERE MemberID = '" +userName +"';");
 			userPass = results.getString("Password");
@@ -194,7 +195,6 @@ public class Database {
 			closeConnection();
 			return false;
 		}
-		
 		
 		if (password.equals(userPass)) {
 			closeConnection();

@@ -66,7 +66,7 @@ public class Login extends JFrame {
 		contentPane.add(lblUsername);
 		
 		txtUsername = new JTextField();
-		txtUsername.setBounds(110, 61, 204, 20);
+		txtUsername.setBounds(110, 49, 204, 32);
 		contentPane.add(txtUsername);
 		txtUsername.setColumns(10);
 		
@@ -136,7 +136,7 @@ public class Login extends JFrame {
 		contentPane.add(btnLibLogin);
 		
 		txtPassword = new JPasswordField();
-		txtPassword.setBounds(110, 99, 204, 20);
+		txtPassword.setBounds(110, 92, 204, 32);
 		contentPane.add(txtPassword);
 	}
 }

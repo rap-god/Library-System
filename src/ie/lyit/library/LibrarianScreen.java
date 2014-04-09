@@ -123,60 +123,60 @@ public class LibrarianScreen extends JFrame {
 		contentPane.add(pnlHeader);
 
 		JLabel lblTitle = new JLabel("Title : ");
-		lblTitle.setBounds(47, 146, 46, 14);
+		lblTitle.setBounds(47, 172, 46, 14);
 		contentPane.add(lblTitle);
 
 		JLabel lblAuthor = new JLabel("Author : ");
-		lblAuthor.setBounds(47, 171, 46, 14);
+		lblAuthor.setBounds(47, 204, 46, 14);
 		contentPane.add(lblAuthor);
 
 		JLabel lblGenre = new JLabel("Genre :");
-		lblGenre.setBounds(47, 196, 46, 14);
+		lblGenre.setBounds(47, 241, 46, 14);
 		contentPane.add(lblGenre);
 
 		JLabel lblPublisher = new JLabel("Publisher :");
-		lblPublisher.setBounds(47, 221, 68, 14);
+		lblPublisher.setBounds(47, 266, 68, 14);
 		contentPane.add(lblPublisher);
 
 		JLabel lblYear = new JLabel("Year :");
-		lblYear.setBounds(47, 246, 46, 14);
+		lblYear.setBounds(47, 291, 46, 14);
 		contentPane.add(lblYear);
 
 		JLabel lblDescription = new JLabel("Description :");
-		lblDescription.setBounds(47, 271, 68, 14);
+		lblDescription.setBounds(47, 328, 68, 14);
 		contentPane.add(lblDescription);
 
 		JLabel lblImage = new JLabel("Image :");
-		lblImage.setBounds(47, 382, 46, 14);
+		lblImage.setBounds(47, 414, 46, 14);
 		contentPane.add(lblImage);
 
 		txtFldTitle = new JTextField();
-		txtFldTitle.setBounds(137, 143, 206, 20);
+		txtFldTitle.setBounds(137, 168, 206, 23);
 		contentPane.add(txtFldTitle);
 		txtFldTitle.setColumns(10);
 
 		txtFldAuthor = new JTextField();
-		txtFldAuthor.setBounds(137, 168, 206, 20);
+		txtFldAuthor.setBounds(137, 200, 206, 23);
 		contentPane.add(txtFldAuthor);
 		txtFldAuthor.setColumns(10);
 
 		txtFldGenre = new JTextField();
-		txtFldGenre.setBounds(137, 193, 206, 20);
+		txtFldGenre.setBounds(137, 234, 206, 23);
 		contentPane.add(txtFldGenre);
 		txtFldGenre.setColumns(10);
 
 		txtFldPublisher = new JTextField();
-		txtFldPublisher.setBounds(137, 218, 206, 20);
+		txtFldPublisher.setBounds(137, 259, 206, 23);
 		contentPane.add(txtFldPublisher);
 		txtFldPublisher.setColumns(10);
 
 		txtFldYear = new JTextField();
-		txtFldYear.setBounds(137, 243, 206, 20);
+		txtFldYear.setBounds(137, 287, 206, 23);
 		contentPane.add(txtFldYear);
 		txtFldYear.setColumns(10);
 
 		txtFldDesc = new JTextField();
-		txtFldDesc.setBounds(137, 268, 206, 100);
+		txtFldDesc.setBounds(137, 328, 206, 73);
 		contentPane.add(txtFldDesc);
 		txtFldDesc.setColumns(10);
 
@@ -187,7 +187,7 @@ public class LibrarianScreen extends JFrame {
 				frame.setVisible(true);
 			}
 		});
-		btnViewMemberDetails.setBounds(47, 90, 133, 23);
+		btnViewMemberDetails.setBounds(10, 90, 166, 23);
 		contentPane.add(btnViewMemberDetails);
 
 		JButton btnOverdueLoans = new JButton("View Overdue Loans");
@@ -197,7 +197,7 @@ public class LibrarianScreen extends JFrame {
 				overdueLoans.setVisible(true);
 			}
 		});
-		btnOverdueLoans.setBounds(210, 90, 133, 23);
+		btnOverdueLoans.setBounds(210, 90, 166, 23);
 		contentPane.add(btnOverdueLoans);
 
 		JButton btnRemoveBook = new JButton("Remove Book");
@@ -274,7 +274,7 @@ public class LibrarianScreen extends JFrame {
 		//***************************************************REMOVE END**********************************************//
 
 		JButton btnFile = new JButton("Open File");
-		btnFile.setBounds(137, 379, 100, 20);
+		btnFile.setBounds(140, 412, 100, 20);
 		contentPane.add(btnFile);
 		btnFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -289,26 +289,26 @@ public class LibrarianScreen extends JFrame {
 		});
 
 		JLabel lblIsbn = new JLabel("ISBN:");
-		lblIsbn.setBounds(47, 124, 46, 14);
+		lblIsbn.setBounds(47, 141, 46, 14);
 		contentPane.add(lblIsbn);
 
 		txtISBN = new JTextField();
 		txtISBN.setColumns(10);
-		txtISBN.setBounds(137, 121, 206, 20);
+		txtISBN.setBounds(137, 137, 206, 23);
 		contentPane.add(txtISBN);
 
 		JLabel lblQuantity = new JLabel("Quantity");
-		lblQuantity.setBounds(47, 413, 46, 14);
+		lblQuantity.setBounds(47, 446, 46, 14);
 		contentPane.add(lblQuantity);
 		
 		txtImg = new JTextField();
 		txtImg.setColumns(10);
-		txtImg.setBounds(240,379, 100, 20);
+		txtImg.setBounds(243,412, 100, 20);
 		contentPane.add(txtImg);
 		
 		txtQuantity = new JTextField();
 		txtQuantity.setColumns(10);
-		txtQuantity.setBounds(137, 410, 206, 20);
+		txtQuantity.setBounds(137, 443, 206, 20);
 		contentPane.add(txtQuantity);
 		
 		JScrollPane scrollPane = new JScrollPane();
