@@ -130,7 +130,7 @@ public class MainScreen extends JFrame{
 				txtSearch.setColumns(10);
 				
 				JButton btnSearch = new JButton("Search");
-				btnSearch.setBounds(620, 89, 99, 27);
+				btnSearch.setBounds(620, 90, 99, 27);
 				contentPane.add(btnSearch);
 				
 				//*************************Search Button****************************************//

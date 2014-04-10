@@ -3,18 +3,14 @@ package ie.lyit.library;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.HeadlessException;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-
 import java.awt.Font;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
@@ -80,12 +76,22 @@ public class Login extends JFrame {
 				
 				try {
 					Database data = new Database();
-					if (data.validLogin(txtUsername.getText(), txtPassword.getText())) {
+					@SuppressWarnings("deprecation")
+					String returnString = data.validLogin(txtUsername.getText(), txtPassword.getText());
+					if (returnString.equals("Member")) {
 						Member m = new Member(txtUsername.getText());
 						Member.setCurrentMember(m);
-						JOptionPane.showMessageDialog(null, "Success!!!");
+						JOptionPane.showMessageDialog(null, "Login Successful!");
 						MainScreen window = new MainScreen();
 						window.setVisible(true);
+						dispose();
+					}
+					
+					else if(returnString.equals("Librarian")) {
+						JOptionPane.showMessageDialog(null, "Welcome, Librarian!");
+						Member.loggedOn = true;
+						LibrarianScreen frame = new LibrarianScreen();
+						frame.setVisible(true);
 						dispose();
 					}
 					
@@ -102,11 +108,11 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		btnLogin.setBounds(25, 147, 89, 23);
+		btnLogin.setBounds(25, 132, 89, 38);
 		contentPane.add(btnLogin);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(225, 147, 89, 23);
+		btnCancel.setBounds(225, 132, 89, 38);
 		contentPane.add(btnCancel);
 		
 		JLabel lblNewLabel = new JLabel("Click register if you do not have an account!");
@@ -121,19 +127,8 @@ public class Login extends JFrame {
 				dispose();
 			}
 		});
-		btnRegister.setBounds(25, 196, 89, 23);
+		btnRegister.setBounds(25, 199, 289, 32);
 		contentPane.add(btnRegister);
-		
-		JButton btnLibLogin = new JButton("Admin");
-		btnLibLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				LibrarianLogin window = new LibrarianLogin();
-				window.setVisible(true);
-				dispose();
-			}
-		});
-		btnLibLogin.setBounds(225, 196, 89, 23);
-		contentPane.add(btnLibLogin);
 		
 		txtPassword = new JPasswordField();
 		txtPassword.setBounds(110, 92, 204, 32);

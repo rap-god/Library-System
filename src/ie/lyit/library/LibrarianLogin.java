@@ -82,12 +82,11 @@ public class LibrarianLogin extends JFrame {
 		contentPane.add(txtPassword);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
+		/*btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
 					if (data.validLoginLibrarian(txtUsername.getText(), txtPassword.getText())) {
-						Librarian l = new Librarian(txtUsername.getText(), txtPassword.getText());
 						JOptionPane.showMessageDialog(null, "Success!!!");
 						LibrarianScreen window = new LibrarianScreen();
 						window.setVisible(true);
@@ -105,7 +104,7 @@ public class LibrarianLogin extends JFrame {
 					e1.printStackTrace();
 				}
 			}
-		});
+		});*/
 		btnLogin.setBounds(71, 132, 89, 23);
 		contentPane.add(btnLogin);
 		

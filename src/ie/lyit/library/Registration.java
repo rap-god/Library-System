@@ -35,8 +35,6 @@ public class Registration extends JFrame {
 	private JPanel contentPane;
 	// Constant to indicate there are 3 houses
 	private final int NUM_OF_PICS = 3;
-	private JTextField txtFFN;
-	private JTextField txtFLN;
 	private JTable table;
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
@@ -123,31 +121,13 @@ public class Registration extends JFrame {
 		btnRegister.setBounds(25, 237, 138, 29);
 		contentPane.add(btnRegister);
 		
-		JLabel lblFirstName = new JLabel("First Name:");
-		lblFirstName.setBounds(46, 177, 86, 15);
-		contentPane.add(lblFirstName);
-		
-		JLabel lblLastName = new JLabel("Last Name:");
-		lblLastName.setBounds(46, 205, 86, 15);
-		contentPane.add(lblLastName);
-		
 		JLabel lblNewPassword = new JLabel("New Password:");
-		lblNewPassword.setBounds(46, 120, 113, 15);
+		lblNewPassword.setBounds(46, 143, 113, 15);
 		contentPane.add(lblNewPassword);
 		
 		JLabel lblReenterPassword = new JLabel("Re-Enter Password:");
-		lblReenterPassword.setBounds(46, 149, 102, 17);
+		lblReenterPassword.setBounds(46, 174, 102, 18);
 		contentPane.add(lblReenterPassword);
-		
-		txtFFN = new JTextField();
-		txtFFN.setBounds(205, 177, 143, 19);
-		contentPane.add(txtFFN);
-		txtFFN.setColumns(10);
-		
-		txtFLN = new JTextField();
-		txtFLN.setBounds(205, 204, 143, 19);
-		contentPane.add(txtFLN);
-		txtFLN.setColumns(10);
 		
 		table = new JTable();
 		table.setBounds(104, 304, 1, 1);
@@ -155,7 +135,7 @@ public class Registration extends JFrame {
 		
 		txtUsername = new JTextField();
 		txtUsername.setColumns(10);
-		txtUsername.setBounds(205, 90, 143, 19);
+		txtUsername.setBounds(205, 90, 143, 29);
 		contentPane.add(txtUsername);
 		
 		JLabel lblUsername = new JLabel("Username:");
@@ -174,11 +154,11 @@ public class Registration extends JFrame {
 		contentPane.add(btnCancel);
 		
 		txtPassword = new JPasswordField();
-		txtPassword.setBounds(205, 117, 143, 20);
+		txtPassword.setBounds(205, 136, 143, 29);
 		contentPane.add(txtPassword);
 		
 		txtComparePassword = new JPasswordField();
-		txtComparePassword.setBounds(205, 147, 143, 20);
+		txtComparePassword.setBounds(205, 179, 143, 29);
 		contentPane.add(txtComparePassword);
 	
 	}

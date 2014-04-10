@@ -170,7 +170,7 @@ public class Database {
 	 * @return True or false depending on whether the details are correct or not.
 	 * @throws SQLException 
 	 */
-	public boolean validLogin(String userName, String password) throws SQLException {
+	/*public boolean validLogin(String userName, String password) throws SQLException {
 		ResultSet results;
 		String userPass = new String();
 		
@@ -185,8 +185,42 @@ public class Database {
 			closeConnection();
 			return false;
 		}
-	}
+	}*/
 	
+	public String validLogin(String userName, String password) {
+		ResultSet results;
+		String userPass;
+		
+		try{
+			// Check if the user is an admin first
+			results = stmt.executeQuery("SELECT * FROM MEMBER WHERE MemberID = '" +userName +"';");
+			userPass = results.getString("Password");
+			closeConnection();
+			
+			int isLibrarian = results.getInt("Is_Librarian");
+			
+			if(isLibrarian == 1) {
+				System.out.println("BALLS");
+			}
+			
+			if(isLibrarian == 1 && password.equals(userPass)) {
+				return "Librarian";
+			}
+			
+			else if(isLibrarian == 0 && password.equals(userPass)) {
+				return "Member";
+			}
+			
+			else{
+				return "Invalid!";
+			}
+		}
+		
+		catch(SQLException e) {
+			return "Invalid";
+		}
+	}
+	/*
 	public boolean validLoginLibrarian(String librararianID, String password) throws SQLException {
 		ResultSet results;
 		String userPass = new String();
@@ -207,7 +241,7 @@ public class Database {
 			closeConnection();
 			return false;
 		}
-	}
+	}*/
 	
 	public void addBook(int isbn, String author, String title,String date, String desc, String publisher, String genre, String image, int quantity)  {	
 		try{		
@@ -284,6 +318,7 @@ public class Database {
 			Date now = new Date();
 			String returnDate = new SimpleDateFormat("dd-MM-yyyy").format(now);
 			updateStmt.executeUpdate("UPDATE Loan SET ReturnDate = '" +returnDate +"'");
+			closeConnection();
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();

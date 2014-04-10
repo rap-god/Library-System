@@ -60,7 +60,7 @@ public class MyAccount extends JFrame{
 	public MyAccount(){
 		
 		setTitle(Member.getCurrentMember().getMemberID() +"'s account.");
-		Database data = new Database();
+		final Database data = new Database();
 		setResizable(false);
 		setTitle("My Account");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,7 +103,7 @@ public class MyAccount extends JFrame{
         btnLogout.setBounds(10, 92, 373, 29);
         contentPane.add(btnLogout);
         
-        JList lstCurrentLoans = new JList(data.getLoans(Member.getCurrentMember().getMemberID()).toArray());
+        final JList lstCurrentLoans = new JList(data.getLoans(Member.getCurrentMember().getMemberID()).toArray());
         lstCurrentLoans.setBorder(new LineBorder(new Color(0, 0, 0)));
         lstCurrentLoans.setBounds(10, 132, 373, 295);
         contentPane.add(lstCurrentLoans);					
@@ -124,6 +124,12 @@ public class MyAccount extends JFrame{
         contentPane.add(btnHome);
         
         JButton btnReturnBook = new JButton("Return Book");
+        btnReturnBook.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Loan selectedLoan = (Loan) lstCurrentLoans.getSelectedValue();
+        		data.returnLoan(selectedLoan.getLoanID());
+        	}
+        });
         btnReturnBook.setBounds(205, 454, 178, 29);
         contentPane.add(btnReturnBook);
 	}
