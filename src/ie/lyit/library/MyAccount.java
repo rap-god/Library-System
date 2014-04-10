@@ -120,8 +120,12 @@ public class MyAccount extends JFrame{
 				}
         	}
         });
-        btnHome.setBounds(10, 454, 373, 29);
+        btnHome.setBounds(10, 454, 178, 29);
         contentPane.add(btnHome);
+        
+        JButton btnReturnBook = new JButton("Return Book");
+        btnReturnBook.setBounds(205, 454, 178, 29);
+        contentPane.add(btnReturnBook);
 	}
 }
 

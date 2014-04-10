@@ -86,9 +86,17 @@ public class MainScreen extends JFrame{
 					};
 			
 				setResizable(false);
-				setTitle("Library - Home");
+				
+				if(Member.loggedOn) {
+					setTitle(Member.getCurrentMember().getMemberID());
+				}
+				
+				else{
+					setTitle("Library - Home");
+				}
+				
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				setBounds(100, 100, 678, 530);
+				setBounds(100, 100, 735, 530);
 				JPanel contentPane = new JPanel();
 				contentPane.setBackground(Color.WHITE);
 				contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -97,12 +105,12 @@ public class MainScreen extends JFrame{
 				
 				JLabel lblHeader = new JLabel("");
 				lblHeader.setIcon(new ImageIcon(HomeWindow.class.getResource("/images/header.png")));
-				lblHeader.setBounds(135, 0, 453, 60);
+				lblHeader.setBounds(160, 0, 453, 60);
 				contentPane.add(lblHeader);
 				
 				JPanel pnlSeparator = new JPanel();
 				pnlSeparator.setBackground(new Color(65, 105, 225));
-				pnlSeparator.setBounds(0, 60, 672, 19);
+				pnlSeparator.setBounds(0, 60, 729, 19);
 				contentPane.add(pnlSeparator);
 				
 				JButton btnLoginRegister = new JButton("Login / Register");
@@ -117,12 +125,12 @@ public class MainScreen extends JFrame{
 				contentPane.add(btnLoginRegister);
 				
 				txtSearch = new JTextField();
-				txtSearch.setBounds(342, 90, 200, 26);
+				txtSearch.setBounds(342, 90, 240, 26);
 				contentPane.add(txtSearch);
 				txtSearch.setColumns(10);
 				
 				JButton btnSearch = new JButton("Search");
-				btnSearch.setBounds(563, 89, 99, 27);
+				btnSearch.setBounds(620, 89, 99, 27);
 				contentPane.add(btnSearch);
 				
 				//*************************Search Button****************************************//
@@ -173,7 +181,7 @@ public class MainScreen extends JFrame{
 					}
 				});
 				
-				btnBorrow.setBounds(342, 467, 320, 26);
+				btnBorrow.setBounds(342, 466, 377, 27);
 				contentPane.add(btnBorrow);
 				
 				final JPanel jplMainPanel = new JPanel();
@@ -182,7 +190,7 @@ public class MainScreen extends JFrame{
 				jplMainPanel.setLayout(c1);
 				
 				JLabel lblImage = new JLabel("");
-				lblImage.setIcon(new ImageIcon(MainScreen.class.getResource("/images/placeholder.jpg")));
+				lblImage.setIcon(new ImageIcon(MainScreen.class.getResource("/images/books_logo.jpg")));
 				jplMainPanel.add(lblImage, "name_1196884078311");
 				
 				JPanel jplDetailsPanel = new JPanel();
@@ -215,17 +223,14 @@ public class MainScreen extends JFrame{
 				
 				//*******************************************************JTable CODE*****************************************************//
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(342, 127, 320, 329);
+				scrollPane.setBounds(342, 127, 377, 329);
 				contentPane.add(scrollPane);
 				Database test = new Database();
 				
 			    //Create Model and set cellEditable to false
-				
-				
 				model.addColumn("ISBN");
 				model.addColumn("Author");
 				model.addColumn("Title");
-				model.addColumn("Quantity");
 				try{
 					test.populateTable(model);
 					
@@ -233,7 +238,6 @@ public class MainScreen extends JFrame{
 				catch(Exception e){
 					
 				}
-				
 				
 				table = new JTable(model);
 				table.setModel(model);

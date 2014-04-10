@@ -46,7 +46,6 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
-		final Database data = new Database();
 		setTitle("Library - Login/Register");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 365, 280);
@@ -80,6 +79,7 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
+					Database data = new Database();
 					if (data.validLogin(txtUsername.getText(), txtPassword.getText())) {
 						Member m = new Member(txtUsername.getText());
 						Member.setCurrentMember(m);

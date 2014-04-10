@@ -1,7 +1,9 @@
 package ie.lyit.library;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -275,6 +277,17 @@ public class Database {
 			
 		}
 		
+	}
+	
+	public void returnLoan(int loanID) {
+		try {
+			Date now = new Date();
+			String returnDate = new SimpleDateFormat("dd-MM-yyyy").format(now);
+			updateStmt.executeUpdate("UPDATE Loan SET ReturnDate = '" +returnDate +"'");
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void searchBooks(String value, DefaultTableModel j) throws SQLException{
