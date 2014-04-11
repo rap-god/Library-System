@@ -25,7 +25,6 @@ public class Database {
 	String image;
 	String category;
 	
-	
 	public Database() {
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -36,7 +35,6 @@ public class Database {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	/**
@@ -123,7 +121,6 @@ public class Database {
 				String loanDate = results.getString("LoanDate");
 				String dueDate = results.getString("DueDate");
 				int ISBN = results.getInt("ISBN");
-				
 				totalLoans.add(new Loan(loanID, loanDate, dueDate, memberID, ISBN));
 			}
 		}
@@ -180,7 +177,6 @@ public class Database {
 			// Check if the user is an admin first
 			results = stmt.executeQuery("SELECT * FROM MEMBER WHERE MemberID = '" +userName +"';");
 			userPass = results.getString("Password");
-			
 			
 			String isLibrarian = results.getString("Is_Librarian");
 			System.out.println(isLibrarian);
