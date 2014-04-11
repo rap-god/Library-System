@@ -110,6 +110,10 @@ public class MainScreen extends JFrame{
 					contentPane.add(btnLoginRegister);
 				}
 				
+				else {
+					setTitle(Member.getCurrentMember().getMemberID() +"'s Library");
+				}
+				
 				txtSearch = new JTextField();
 				txtSearch.setBounds(372, 90, 272, 30);
 				contentPane.add(txtSearch);
@@ -239,15 +243,15 @@ public class MainScreen extends JFrame{
 					jplDetailsPanel.add(lblSmallImage);
 					
 					final JLabel lblTitle = new JLabel("");
-					lblTitle.setBounds(0, 0, 125, 23);
+					lblTitle.setBounds(0, 0, 156, 23);
 					jplDetailsPanel.add(lblTitle);
 					
 					final JLabel lblAuthor = new JLabel("");
-					lblAuthor.setBounds(0, 34, 125, 23);
+					lblAuthor.setBounds(0, 34, 156, 23);
 					jplDetailsPanel.add(lblAuthor);
 					
 					final JLabel lblPublisher = new JLabel("");
-					lblPublisher.setBounds(0, 68, 125, 23);
+					lblPublisher.setBounds(0, 68, 156, 23);
 					jplDetailsPanel.add(lblPublisher);
 					
 					final JTextArea txtDescription = new JTextArea();
@@ -312,7 +316,6 @@ public class MainScreen extends JFrame{
 									lblAuthor.setText(selectedBook.getAuthor());
 									lblPublisher.setText(selectedBook.getPublisher());
 									txtDescription.setText(selectedBook.getDescription());
-									
 									txtDescription.setLineWrap(true);
 									txtDescription.setWrapStyleWord(true);
 									BufferedImage img = null;
@@ -336,8 +339,6 @@ public class MainScreen extends JFrame{
 
 								}
 							}
-							
-							
 						}
 					});
 					

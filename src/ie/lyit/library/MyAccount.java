@@ -21,9 +21,11 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Button;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+
 import javax.swing.JList;
 import javax.swing.border.LineBorder;
 
@@ -50,16 +52,15 @@ public class MyAccount extends JFrame{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
-				
 			}
 		});
-		
-
 	}
 	public MyAccount(){
 		
-		setTitle(Member.getCurrentMember().getMemberID() +"'s account.");
+		if(Member.loggedOn) {
+			setTitle(Member.getCurrentMember().getMemberID() +"'s account.");
+		}
+		
 		final Database data = new Database();
 		setResizable(false);
 		setTitle("My Account");
@@ -103,7 +104,7 @@ public class MyAccount extends JFrame{
         btnLogout.setBounds(10, 92, 373, 29);
         contentPane.add(btnLogout);
         
-        final JList lstCurrentLoans = new JList(data.getLoans(Member.getCurrentMember().getMemberID()).toArray());
+		final JList lstCurrentLoans = new JList(data.getLoans(Member.getCurrentMember().getMemberID()).toArray());
         lstCurrentLoans.setBorder(new LineBorder(new Color(0, 0, 0)));
         lstCurrentLoans.setBounds(10, 132, 373, 295);
         contentPane.add(lstCurrentLoans);					
@@ -127,11 +128,33 @@ public class MyAccount extends JFrame{
         btnReturnBook.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		Loan selectedLoan = (Loan) lstCurrentLoans.getSelectedValue();
-        		data.returnLoan(selectedLoan.getLoanID());
+        		
+        		if (selectedLoan != null) {
+        			try {
+						JOptionPane.showMessageDialog(null, "Book: " +data.getBookByISBN(selectedLoan.getISBN()).getTitle() +" has been returned successfully.");
+						MyAccount frame = new MyAccount();
+						dispose();
+						frame.setVisible(true);
+					} catch (HeadlessException e1) {
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+        			data.returnLoan(selectedLoan.getLoanID());
+        			
+        		}
+        		
+        		else{
+        			JOptionPane.showMessageDialog(null, "No Loan selected!");
+        		}
         	}
         });
         btnReturnBook.setBounds(205, 454, 178, 29);
         contentPane.add(btnReturnBook);
+        
+        if(lstCurrentLoans.getComponentCount() == 0) {
+        	btnReturnBook.setEnabled(false);
+        }
 	}
 }
 

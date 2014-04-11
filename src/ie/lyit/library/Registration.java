@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.border.*;
 import javax.swing.JTable;
@@ -98,16 +99,26 @@ public class Registration extends JFrame {
 					}
 					
 					if (txtPassword.getText().equals(txtComparePassword.getText())) {
+						ArrayList<String> currentMembers = data.getMembers();
+						for(String s : currentMembers) {
+							if(txtUsername.getText().equals(s)) {
+								throw new IllegalArgumentException("Member already exists!");
+							}
+						}
 						data.registerUser(txtUsername.getText(), txtPassword.getText());
 						Member newMember = new Member(txtUsername.getText());
+						Member.setCurrentMember(newMember);
+						Member.loggedOn = true;
 						JOptionPane.showMessageDialog(null, "Registration Successful!");
 						MainScreen frame = new MainScreen();
 						frame.setVisible(true);
 						dispose();
 					}
-					
 					else {
 						JOptionPane.showMessageDialog(null, "Passwords don't match.");
+						txtUsername.setText("");
+						txtPassword.setText("");
+						txtComparePassword.setText("");
 					}
 				}
 				
@@ -117,6 +128,9 @@ public class Registration extends JFrame {
 				
 				catch(IllegalArgumentException e2) {
 					JOptionPane.showMessageDialog(null, e2.getMessage());
+					txtUsername.setText("");
+					txtPassword.setText("");
+					txtComparePassword.setText("");
 				}
 			}
 		});
@@ -124,11 +138,11 @@ public class Registration extends JFrame {
 		contentPane.add(btnRegister);
 		
 		JLabel lblNewPassword = new JLabel("New Password:");
-		lblNewPassword.setBounds(46, 143, 113, 15);
+		lblNewPassword.setBounds(46, 136, 138, 29);
 		contentPane.add(lblNewPassword);
 		
 		JLabel lblReenterPassword = new JLabel("Re-Enter Password:");
-		lblReenterPassword.setBounds(46, 174, 102, 18);
+		lblReenterPassword.setBounds(46, 174, 149, 34);
 		contentPane.add(lblReenterPassword);
 		
 		table = new JTable();
@@ -141,7 +155,7 @@ public class Registration extends JFrame {
 		contentPane.add(txtUsername);
 		
 		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(46, 90, 86, 15);
+		lblUsername.setBounds(46, 90, 117, 29);
 		contentPane.add(lblUsername);
 		
 		JButton btnCancel = new JButton("Cancel");

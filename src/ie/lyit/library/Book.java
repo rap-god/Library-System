@@ -1,9 +1,7 @@
 package ie.lyit.library;
 
 /**
- * Class for initializing a new Book object.
- * @author Sean Morris - L00095752
- *
+ * Class for initializing a new Book object. 
  */
 public class Book {
 
@@ -16,21 +14,30 @@ public class Book {
 	private String publisher;
 	int quantity;
 	private String imgPath;
-	
+
 	/**
 	 * Constructor for instantiating a Book object. (Description not included)
-	 * @param ISBN Book's unique ISBN number.
-	 * @param author Book's author.
-	 * @param title Book's title.
-	 * @param publishedYear Year book was published.
-	 * @param genre Book's Genre.
-	 * @param publisher Book's publisher.
+	 * 
+	 * @param ISBN
+	 *            Book's unique ISBN number.
+	 * @param author
+	 *            Book's author.
+	 * @param title
+	 *            Book's title.
+	 * @param publishedYear
+	 *            Year book was published.
+	 * @param genre
+	 *            Book's Genre.
+	 * @param publisher
+	 *            Book's publisher.
 	 */
-	
+
 	public Book() {
 		// Default empty constructor ...
 	}
-	public Book(int ISBN, String author, String title, int publishedYear, String genre, String publisher, int q) {
+
+	public Book(int ISBN, String author, String title, int publishedYear,
+			String genre, String publisher, int q) {
 		this.ISBN = ISBN;
 		this.author = author;
 		this.title = title;
@@ -39,17 +46,25 @@ public class Book {
 		this.publisher = publisher;
 		this.quantity = q;
 	}
-	
+
 	/**
 	 * Constructor for instantiating a Book object. (Description included)
-	 * @param ISBN Book's unique ISBN number.
-	 * @param author Book's author.
-	 * @param title Book's title.
-	 * @param publishedYear Year book was published.
-	 * @param genre Book's Genre.
-	 * @param publisher Book's publisher.
+	 * 
+	 * @param ISBN
+	 *            Book's unique ISBN number.
+	 * @param author
+	 *            Book's author.
+	 * @param title
+	 *            Book's title.
+	 * @param publishedYear
+	 *            Year book was published.
+	 * @param genre
+	 *            Book's Genre.
+	 * @param publisher
+	 *            Book's publisher.
 	 */
-	public Book(int ISBN, String author, String title, int publishedYear, String genre, String description, String publisher) {
+	public Book(int ISBN, String author, String title, int publishedYear,
+			String genre, String description, String publisher) {
 		this.ISBN = ISBN;
 		this.author = author;
 		this.title = title;
@@ -59,9 +74,10 @@ public class Book {
 		this.publisher = publisher;
 		this.quantity = 1;
 	}
-	
+
 	/**
 	 * Retrieve the book's unique ISBN.
+	 * 
 	 * @return The book's ISBN.
 	 */
 	public int getISBN() {
@@ -70,7 +86,9 @@ public class Book {
 
 	/**
 	 * Set the book's ISBN.
-	 * @param iSBN The book's unique ISBN number.
+	 * 
+	 * @param iSBN
+	 *            The book's unique ISBN number.
 	 */
 	public void setISBN(int iSBN) {
 		ISBN = iSBN;
@@ -78,6 +96,7 @@ public class Book {
 
 	/**
 	 * Retrieve the book's author.
+	 * 
 	 * @return The name of the book's author.
 	 */
 	public String getAuthor() {
@@ -86,7 +105,9 @@ public class Book {
 
 	/**
 	 * Set the author.
-	 * @param author The author's name.
+	 * 
+	 * @param author
+	 *            The author's name.
 	 */
 	public void setAuthor(String author) {
 		this.author = author;
@@ -94,22 +115,26 @@ public class Book {
 
 	/**
 	 * Retrieve the book's title.
+	 * 
 	 * @return The book's title.
 	 */
 	public String getTitle() {
 		return title;
 	}
-	
+
 	/**
 	 * Set the title of the book.
-	 * @param title The book's title.
+	 * 
+	 * @param title
+	 *            The book's title.
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	/**
 	 * Retrieve the year the book was published in.
+	 * 
 	 * @return The year the book was published.
 	 */
 	public int getPublishedYear() {
@@ -118,7 +143,9 @@ public class Book {
 
 	/**
 	 * Set the year the book was published.
-	 * @param publishedYear Year the book was published in.
+	 * 
+	 * @param publishedYear
+	 *            Year the book was published in.
 	 */
 	public void setPublishedYear(int publishedYear) {
 		this.publishedYear = publishedYear;
@@ -126,6 +153,7 @@ public class Book {
 
 	/**
 	 * Retrieve the books genre.
+	 * 
 	 * @return The book's genre.
 	 */
 	public String getGenre() {
@@ -134,7 +162,9 @@ public class Book {
 
 	/**
 	 * Set the books genre.
-	 * @param genre The book's genre.
+	 * 
+	 * @param genre
+	 *            The book's genre.
 	 */
 	public void setGenre(String genre) {
 		this.genre = genre;
@@ -142,6 +172,7 @@ public class Book {
 
 	/**
 	 * Retrieve the book's description (synopsis).
+	 * 
 	 * @return The book's description.
 	 */
 	public String getDescription() {
@@ -150,7 +181,9 @@ public class Book {
 
 	/**
 	 * Set the description for the book.
-	 * @param description The book's description.
+	 * 
+	 * @param description
+	 *            The book's description.
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -158,6 +191,7 @@ public class Book {
 
 	/**
 	 * Retrieve the book's publisher.
+	 * 
 	 * @return The name of the book's publisher.
 	 */
 	public String getPublisher() {
@@ -166,7 +200,9 @@ public class Book {
 
 	/**
 	 * Set the book's publisher.
-	 * @param publisher The name of the book's publisher.
+	 * 
+	 * @param publisher
+	 *            The name of the book's publisher.
 	 */
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
@@ -174,6 +210,7 @@ public class Book {
 
 	/**
 	 * Retrieve the quantity of books currently available ...
+	 * 
 	 * @return Available quantity.
 	 */
 	public int getQuantity() {
@@ -182,15 +219,17 @@ public class Book {
 
 	/**
 	 * Set the current quantity of books available.
-	 * @param quantity Current quantity of books.
+	 * 
+	 * @param quantity
+	 *            Current quantity of books.
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
+
 	/**
 	 * Return the book's details as a string.
+	 * 
 	 * @return The book's details as a string.
 	 */
 	@Override

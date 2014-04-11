@@ -192,31 +192,35 @@ public class LibrarianScreen extends JFrame {
 				// local variables
 				int isbn = 0;
 				try {
-					if(txtFldTitle.getText().equals("") || txtFldDesc.getText().equals("") || txtISBN.getText().equals("") || txtFldAuthor.getText().equals("") || txtFldGenre.getText().equals("")) {
-						throw new IllegalArgumentException("All fields must contain correct data!");
+					if (txtFldTitle.getText().equals("")
+							|| txtFldDesc.getText().equals("")
+							|| txtISBN.getText().equals("")
+							|| txtFldAuthor.getText().equals("")
+							|| txtFldGenre.getText().equals("")) {
+						throw new IllegalArgumentException(
+								"All fields must contain correct data!");
 					}
-					
+
 					isbn = Integer.parseInt(txtISBN.getText());
-						//add book to the database
-						data.addBook(isbn, txtFldAuthor.getText(),
-								txtFldTitle.getText(), txtFldYear.getText(),
-								txtFldDesc.getText(),
-								txtFldPublisher.getText(),
-								txtFldGenre.getText(), txtImg.getText());
-						
-						resetTextFields();
-						model.fireTableDataChanged();
-						model.setRowCount(0);
-						data.populateTable(model);
-						boxModel.removeAllElements();
-						data.populateComboBox(boxModel);
-					
-				} 
-				
+					// add book to the database
+					data.addBook(isbn, txtFldAuthor.getText(),
+							txtFldTitle.getText(), txtFldYear.getText(),
+							txtFldDesc.getText(), txtFldPublisher.getText(),
+							txtFldGenre.getText(), txtImg.getText());
+
+					resetTextFields();
+					model.fireTableDataChanged();
+					model.setRowCount(0);
+					data.populateTable(model);
+					boxModel.removeAllElements();
+					data.populateComboBox(boxModel);
+
+				}
+
 				catch (IllegalArgumentException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
-				
+
 				catch (Exception x) {
 					JOptionPane.showMessageDialog(null,
 							"Fields Must Contain Correct Data");
@@ -357,50 +361,48 @@ public class LibrarianScreen extends JFrame {
 		txtFldDesc = new JTextArea();
 		txtFldDesc.setLineWrap(true);
 		scrollPane_1.setViewportView(txtFldDesc);
-		
-		
+
 		Database haha = new Database();
 		haha.populateComboBox(boxModel);
 		box = new JComboBox(boxModel);
 		box.setBounds(201, 90, 148, 31);
 		contentPane.add(box);
-		
+
 		box.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-			if(box.getSelectedIndex()>-1){
-				genre = box.getSelectedItem().toString();
-				Database test = new Database();
-				model.setRowCount(0);	
-				if(box.getSelectedItem().equals("-All books-")){
-					
-					
-					try {
-						model.setRowCount(0);
-						test.populateTable(model);
-					} catch (SQLException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-					
-				}//end if	
-				else{
-					
-						try {	
-							test.searchByGenre(genre, model);
-								
+				if (box.getSelectedIndex() > -1) {
+					genre = box.getSelectedItem().toString();
+					Database test = new Database();
+					model.setRowCount(0);
+					if (box.getSelectedItem().equals("-All books-")) {
+
+						try {
+							model.setRowCount(0);
+							test.populateTable(model);
+						} catch (SQLException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
 						}
-						catch (SQLException e1) {
+
+					}// end if
+					else {
+
+						try {
+							test.searchByGenre(genre, model);
+
+						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-				}//end else	
+					}// end else
+				}
+
 			}
-				
-			}
-			});
-			
-			//***************************************************** COMBO BOX ACTION LISTENER END *******************************************//
+		});
+
+		// ***************************************************** COMBO BOX
+		// ACTION LISTENER END *******************************************//
 
 	}
 

@@ -49,54 +49,58 @@ public class Login extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblHeading = new JLabel("User Login");
 		lblHeading.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblHeading.setBounds(120, 11, 88, 27);
 		contentPane.add(lblHeading);
-		
+
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUsername.setBounds(25, 56, 75, 27);
 		contentPane.add(lblUsername);
-		
+
 		txtUsername = new JTextField();
 		txtUsername.setBounds(110, 49, 204, 32);
 		contentPane.add(txtUsername);
 		txtUsername.setColumns(10);
-		
+
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPassword.setBounds(25, 94, 75, 27);
 		contentPane.add(lblPassword);
-		
+
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				try {
 					Database data = new Database();
 					@SuppressWarnings("deprecation")
-					String returnString = data.validLogin(txtUsername.getText(), txtPassword.getText());
+					String returnString = data.validLogin(
+							txtUsername.getText(), txtPassword.getText());
 					if (returnString.equals("Member")) {
 						Member m = new Member(txtUsername.getText());
 						Member.setCurrentMember(m);
-						JOptionPane.showMessageDialog(null, "Login Successful!");
+						JOptionPane
+								.showMessageDialog(null, "Login Successful!");
 						MainScreen window = new MainScreen();
 						window.setVisible(true);
 						dispose();
 					}
-					
-					else if(returnString.equals("Librarian")) {
-						JOptionPane.showMessageDialog(null, "Welcome, Librarian!");
+
+					else if (returnString.equals("Librarian")) {
+						JOptionPane.showMessageDialog(null,
+								"Welcome, Librarian!");
 						Member.loggedOn = true;
 						LibrarianScreen frame = new LibrarianScreen();
 						frame.setVisible(true);
 						dispose();
 					}
-					
+
 					else {
-						JOptionPane.showMessageDialog(null, "Incorrect Login details!");
+						JOptionPane.showMessageDialog(null,
+								"Incorrect Login details!");
 						data.closeConnection();
 						txtUsername.setText("");
 						txtPassword.setText("");
@@ -110,7 +114,7 @@ public class Login extends JFrame {
 		});
 		btnLogin.setBounds(25, 132, 89, 38);
 		contentPane.add(btnLogin);
-		
+
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -122,16 +126,17 @@ public class Login extends JFrame {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 		btnCancel.setBounds(225, 132, 89, 38);
 		contentPane.add(btnCancel);
-		
-		JLabel lblNewLabel = new JLabel("Click register if you do not have an account!");
+
+		JLabel lblNewLabel = new JLabel(
+				"Click register if you do not have an account!");
 		lblNewLabel.setBounds(70, 170, 212, 27);
 		contentPane.add(lblNewLabel);
-		
+
 		JButton btnRegister = new JButton("Register");
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -142,7 +147,7 @@ public class Login extends JFrame {
 		});
 		btnRegister.setBounds(25, 199, 289, 32);
 		contentPane.add(btnRegister);
-		
+
 		txtPassword = new JPasswordField();
 		txtPassword.setBounds(110, 92, 204, 32);
 		contentPane.add(txtPassword);
