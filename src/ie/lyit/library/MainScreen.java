@@ -254,10 +254,13 @@ public class MainScreen extends JFrame{
 					jplDetailsPanel.add(lblPublisher);
 					
 					final JTextArea txtDescription = new JTextArea();
-					txtDescription.setEditable(false);
-					txtDescription.setBounds(10, 119, 270, 199);
 					jplDetailsPanel.add(txtDescription);
+					txtDescription.setEditable(false);
+					txtDescription.setBounds(0, 119, 280, 210);
 					
+					JScrollPane scrollPane_1 = new JScrollPane(txtDescription);
+					scrollPane_1.setBounds(0, 119, 280, 210);
+					jplDetailsPanel.add(scrollPane_1);	
 					
 					//******************************************************JTABLE CODE************************************************************//
 					JScrollPane scrollPane = new JScrollPane();
