@@ -72,7 +72,7 @@ public class MyAccount extends JFrame{
 		contentPane.setLayout(null);
 		
 		JLabel lblHeader = new JLabel("");
-		lblHeader.setIcon(new ImageIcon(MemberScreen.class.getResource("/images/header.png")));
+		lblHeader.setIcon(new ImageIcon(MyAccount.class.getResource("/images/header.png")));
 		lblHeader.setBounds(0, 0, 404, 60);
 		contentPane.add(lblHeader);
 		

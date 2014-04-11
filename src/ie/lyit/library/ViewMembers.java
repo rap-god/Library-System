@@ -54,8 +54,8 @@ public class ViewMembers extends JFrame{
 		contentPane.setLayout(null);
 		
 		JLabel lblHeader = new JLabel("");
-		lblHeader.setIcon(new ImageIcon(MemberScreen.class.getResource("/images/header.png")));
-		lblHeader.setBounds(0, 0, 404, 60);
+		lblHeader.setIcon(new ImageIcon(ViewMembers.class.getResource("/images/header.png")));
+		lblHeader.setBounds(0, 0, 394, 60);
 		contentPane.add(lblHeader);
 		
 		JPanel pnlSeparator = new JPanel();

@@ -112,6 +112,19 @@ public class Login extends JFrame {
 		contentPane.add(btnLogin);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MainScreen frame;
+				try {
+					frame = new MainScreen();
+					frame.setVisible(true);
+					dispose();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
 		btnCancel.setBounds(225, 132, 89, 38);
 		contentPane.add(btnCancel);
 		
