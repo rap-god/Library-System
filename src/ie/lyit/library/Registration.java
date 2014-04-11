@@ -54,15 +54,7 @@ public class Registration extends JFrame {
 				
 				catch (Exception e) {
 					System.out.println(e.getMessage());
-				}
-				
-				try {
-					MemberScreen frame = new MemberScreen();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
+				}			
 			}
 		});
 	}
@@ -83,8 +75,8 @@ public class Registration extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblHeader = new JLabel("");
-		lblHeader.setIcon(new ImageIcon(MemberScreen.class.getResource("/images/header.png")));
-		lblHeader.setBounds(0, 0, 404, 60);
+		lblHeader.setIcon(new ImageIcon(Registration.class.getResource("/images/header.png")));
+		lblHeader.setBounds(0, 0, 394, 60);
 		contentPane.add(lblHeader);
 		
 		JPanel pnlSeparator = new JPanel();
@@ -100,11 +92,16 @@ public class Registration extends JFrame {
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					
+					if(txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty() || txtComparePassword.getText().isEmpty()) {
+						throw new IllegalArgumentException("Fields must contain correct data!");
+					}
+					
 					if (txtPassword.getText().equals(txtComparePassword.getText())) {
 						data.registerUser(txtUsername.getText(), txtPassword.getText());
 						Member newMember = new Member(txtUsername.getText());
 						JOptionPane.showMessageDialog(null, "Registration Successful!");
-						MemberScreen frame = new MemberScreen();
+						MainScreen frame = new MainScreen();
 						frame.setVisible(true);
 						dispose();
 					}
@@ -112,9 +109,14 @@ public class Registration extends JFrame {
 					else {
 						JOptionPane.showMessageDialog(null, "Passwords don't match.");
 					}
-				} catch (SQLException e1) {
-
+				}
+				
+				catch (SQLException e1) {
 					e1.printStackTrace();
+				}
+				
+				catch(IllegalArgumentException e2) {
+					JOptionPane.showMessageDialog(null, e2.getMessage());
 				}
 			}
 		});

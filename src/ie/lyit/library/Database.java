@@ -217,6 +217,22 @@ public class Database {
 		}
 	}
 	
+	public ArrayList<String> getMembers() {
+		ResultSet results;
+		try{
+			results = stmt.executeQuery("SELECT MemberID FROM Member");
+			ArrayList<String> memberNames = new ArrayList<String>();
+			
+			while(results.next()) {
+				memberNames.add(results.getString("MemberID"));
+			}
+			return memberNames;
+		}
+		
+		catch(SQLException e) {
+			return null;
+		}
+	}
 	public void getColumns(){
 		
 		try {

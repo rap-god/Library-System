@@ -189,7 +189,6 @@ public class Book {
 	}
 	
 	
-	
 	/**
 	 * Return the book's details as a string.
 	 * @return The book's details as a string.

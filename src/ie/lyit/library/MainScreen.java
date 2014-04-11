@@ -328,10 +328,12 @@ public class MainScreen extends JFrame{
 									Image scaledImage = img.getScaledInstance(lblSmallImage.getWidth(), lblSmallImage.getHeight(), Image.SCALE_SMOOTH);
 									ImageIcon icon = new ImageIcon(scaledImage);
 									lblSmallImage.setIcon(icon); 
-
 									
 								} catch (SQLException e) {
 									e.printStackTrace();
+								}
+								catch(NullPointerException e1) {
+
 								}
 							}
 							
