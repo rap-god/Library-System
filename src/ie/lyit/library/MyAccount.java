@@ -22,9 +22,11 @@ import java.awt.EventQueue;
 import java.awt.Button;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JList;
 import javax.swing.border.LineBorder;
@@ -32,7 +34,8 @@ import javax.swing.border.LineBorder;
 public class MyAccount extends JFrame{
 
 	private JPanel contentPane;
-	
+	Database dataOne = new Database();
+	JList lstCurrentLoans = new JList(dataOne.getLoans(Member.getCurrentMember().getMemberID()).toArray());
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -55,13 +58,12 @@ public class MyAccount extends JFrame{
 			}
 		});
 	}
-	public MyAccount(){
+	public MyAccount() throws SQLException{
 		
 		if(Member.loggedOn) {
 			setTitle(Member.getCurrentMember().getMemberID() +"'s account.");
 		}
-		
-		final Database data = new Database();
+
 		setResizable(false);
 		setTitle("My Account");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,7 +106,7 @@ public class MyAccount extends JFrame{
         btnLogout.setBounds(10, 92, 373, 29);
         contentPane.add(btnLogout);
         
-		final JList lstCurrentLoans = new JList(data.getLoans(Member.getCurrentMember().getMemberID()).toArray());
+		//final JList lstCurrentLoans = new JList(dataOne.getLoans(Member.getCurrentMember().getMemberID()).toArray());
         lstCurrentLoans.setBorder(new LineBorder(new Color(0, 0, 0)));
         lstCurrentLoans.setBounds(10, 132, 373, 295);
         contentPane.add(lstCurrentLoans);					
@@ -123,25 +125,26 @@ public class MyAccount extends JFrame{
         });
         btnHome.setBounds(10, 454, 178, 29);
         contentPane.add(btnHome);
+        dataOne.closeConnection();
         
         JButton btnReturnBook = new JButton("Return Book");
         btnReturnBook.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		Database data = new Database();
         		Loan selectedLoan = (Loan) lstCurrentLoans.getSelectedValue();
         		
         		if (selectedLoan != null) {
         			try {
 						JOptionPane.showMessageDialog(null, "Book: " +data.getBookByISBN(selectedLoan.getISBN()).getTitle() +" has been returned successfully.");
-						MyAccount frame = new MyAccount();
+						MyAccount myAccountWindow = new MyAccount();
+						myAccountWindow.setVisible(true);
 						dispose();
-						frame.setVisible(true);
 					} catch (HeadlessException e1) {
 						e1.printStackTrace();
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
         			data.returnLoan(selectedLoan.getLoanID());
-        			
         		}
         		
         		else{

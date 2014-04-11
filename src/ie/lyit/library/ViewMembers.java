@@ -83,8 +83,8 @@ public class ViewMembers extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					LibrarianScreen frame = new LibrarianScreen();
-					frame.setVisible(true);
+					LibrarianScreen librarianScreen = new LibrarianScreen();
+					librarianScreen.setVisible(true);
 					dispose();
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());

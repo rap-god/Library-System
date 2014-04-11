@@ -29,6 +29,8 @@ import java.sql.SQLException;
 
 import javax.swing.JTable;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
 public class LibrarianScreen extends JFrame {
 
 	private JPanel contentPane;
@@ -173,13 +175,14 @@ public class LibrarianScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ViewMembers frame = new ViewMembers();
 				frame.setVisible(true);
+				dispose();
 			}
 		});
 		btnViewMemberDetails.setBounds(10, 88, 166, 33);
 		contentPane.add(btnViewMemberDetails);
 
 		JButton btnRemoveBook = new JButton("Remove Book");
-		btnRemoveBook.setBounds(395, 567, 374, 33);
+		btnRemoveBook.setBounds(588, 567, 181, 33);
 		contentPane.add(btnRemoveBook);
 
 		JButton btnAddBook = new JButton("Add Book");
@@ -214,7 +217,6 @@ public class LibrarianScreen extends JFrame {
 					data.populateTable(model);
 					boxModel.removeAllElements();
 					data.populateComboBox(boxModel);
-
 				}
 
 				catch (IllegalArgumentException e1) {
@@ -233,9 +235,7 @@ public class LibrarianScreen extends JFrame {
 		// **************************************************************************************************//
 		btnRemoveBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				Database data = new Database();
-
 				if (table.getSelectedRow() > -1) {
 					row = table.getSelectedRow();
 					int col = 0;
@@ -252,15 +252,11 @@ public class LibrarianScreen extends JFrame {
 							model.fireTableDataChanged();
 							model.setRowCount(0);
 							data.populateTable(model);
-
 						}
 					} catch (HeadlessException | SQLException x) {
-						// TODO Auto-generated catch block
 						x.printStackTrace();
 					}
-
 				}
-
 			}
 		});
 		// ***************************************************REMOVE
@@ -272,8 +268,6 @@ public class LibrarianScreen extends JFrame {
 		btnFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fc = new JFileChooser();
-				// Database data = new Database();
-
 				int returnVal = fc.showOpenDialog(LibrarianScreen.this);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					txtImg.setText(fc.getSelectedFile().getName());
@@ -315,12 +309,10 @@ public class LibrarianScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Database test = new Database();
 				model.setRowCount(0);
-				// String value = txtSearch.toString();
 
 				try {
 					test.searchBooks(txtSearch.getText(), model);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				if (txtSearch.getText().equals("")) {
@@ -328,7 +320,6 @@ public class LibrarianScreen extends JFrame {
 						model.setRowCount(0);
 						test.populateTable(model);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 
 					}
@@ -368,8 +359,24 @@ public class LibrarianScreen extends JFrame {
 		box.setBounds(201, 90, 148, 31);
 		contentPane.add(box);
 
-		box.addActionListener(new ActionListener() {
+		JButton btnViewOverdueLoans = new JButton("View Overdue Loans");
+		btnViewOverdueLoans.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					OverdueLoans overdueLoans = new OverdueLoans();
+					overdueLoans.setVisible(true);
+					dispose();
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
+		btnViewOverdueLoans.setBounds(395, 567, 181, 33);
+		contentPane.add(btnViewOverdueLoans);
 
+		box.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (box.getSelectedIndex() > -1) {
 					genre = box.getSelectedItem().toString();
@@ -381,7 +388,6 @@ public class LibrarianScreen extends JFrame {
 							model.setRowCount(0);
 							test.populateTable(model);
 						} catch (SQLException e2) {
-							// TODO Auto-generated catch block
 							e2.printStackTrace();
 						}
 
@@ -392,18 +398,15 @@ public class LibrarianScreen extends JFrame {
 							test.searchByGenre(genre, model);
 
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}// end else
 				}
-
 			}
 		});
 
 		// ***************************************************** COMBO BOX
 		// ACTION LISTENER END *******************************************//
-
 	}
 
 	// Public method to reset JTextField's

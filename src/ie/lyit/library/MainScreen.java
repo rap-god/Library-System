@@ -213,7 +213,6 @@ public class MainScreen extends JFrame{
 								Loan l;
 								data.createLoan(l = new Loan(Member.getCurrentMember().getMemberID(), selectedBook.getISBN()));
 								JOptionPane.showMessageDialog(null, "Loan taken out on: " +selectedBook.getTitle());
-								System.out.println(l.getLoanDate());
 							}
 
 							else {
@@ -279,19 +278,21 @@ public class MainScreen extends JFrame{
 					
 					table = new JTable(model);
 					table.setModel(model);
-					
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					scrollPane.setViewportView(table);
-					
-					
 					
 					if(Member.loggedOn) {
 						JButton btnMyAccount = new JButton("My Account");
 						btnMyAccount.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) { 
-								MyAccount frame = new MyAccount();
-								frame.setVisible(true);
-								dispose();
+								MyAccount frame;
+								try {
+									frame = new MyAccount();
+									frame.setVisible(true);
+									dispose();
+								} catch (SQLException e) {
+									e.printStackTrace();
+								}
 							}
 						});
 						btnMyAccount.setBounds(20, 466, 280, 35);

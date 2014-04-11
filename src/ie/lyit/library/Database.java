@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
 /**
  * Class for initializing the database connection and handling the reads/writes.
  */
@@ -24,16 +26,17 @@ public class Database {
 	String g;
 	String image;
 	String category;
+	int loanID;
 
 	/**
-	 * Database class constructor. Sets up the connection
-	 * to the sqlite database.
+	 * Database class constructor. Sets up the connection to the sqlite
+	 * database.
 	 */
 	public Database() {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager
-					.getConnection("jdbc:sqlite:library.sqlite"); 
+					.getConnection("jdbc:sqlite:library.sqlite");
 			stmt = connection.createStatement();
 			updateStmt = connection.createStatement();
 		} catch (Exception e) {
@@ -116,7 +119,10 @@ public class Database {
 
 	/**
 	 * Create a new Loan.
-	 * @param l Loan object, details from this object are passed into the database.
+	 * 
+	 * @param l
+	 *            Loan object, details from this object are passed into the
+	 *            database.
 	 */
 	public void createLoan(Loan l) {
 		try {
@@ -141,9 +147,10 @@ public class Database {
 	}
 
 	/**
-	 * Retrieves all of the loans taken out by the member with the 
-	 * specified ID.
-	 * @param memberID ID of member to check.
+	 * Retrieves all of the loans taken out by the member with the specified ID.
+	 * 
+	 * @param memberID
+	 *            ID of member to check.
 	 * @return List of all loans taken out by that member.
 	 */
 	public ArrayList<Loan> getLoans(String memberID) {
@@ -171,6 +178,7 @@ public class Database {
 
 	/**
 	 * Retrieve the last recorded loan ID. Used to increment for the next ID.
+	 * 
 	 * @return Last recorded loan ID.
 	 */
 	public int getLastLoanID() {
@@ -267,9 +275,11 @@ public class Database {
 	}
 
 	/**
-	 * Return true or false depending on whether the user with given
-	 * name is a libarian.
-	 * @param userName Username to check.
+	 * Return true or false depending on whether the user with given name is a
+	 * libarian.
+	 * 
+	 * @param userName
+	 *            Username to check.
 	 * @return True or false if the member is a librarian.
 	 */
 	public boolean isLibrarian(String userName) {
@@ -289,14 +299,23 @@ public class Database {
 
 	/**
 	 * Add a book, with specified fields, to the database.
-	 * @param isbn Book's unique ISBN
-	 * @param author Book's author.
-	 * @param title Book's title.
-	 * @param date Date published
-	 * @param desc Book's description.
-	 * @param publisher Book's publisher.
-	 * @param genre Book's genre.
-	 * @param image Path to book cover image.
+	 * 
+	 * @param isbn
+	 *            Book's unique ISBN
+	 * @param author
+	 *            Book's author.
+	 * @param title
+	 *            Book's title.
+	 * @param date
+	 *            Date published
+	 * @param desc
+	 *            Book's description.
+	 * @param publisher
+	 *            Book's publisher.
+	 * @param genre
+	 *            Book's genre.
+	 * @param image
+	 *            Path to book cover image.
 	 */
 	public void addBook(int isbn, String author, String title, String date,
 			String desc, String publisher, String genre, String image) {
@@ -313,6 +332,7 @@ public class Database {
 
 	/**
 	 * Retrieve the usernames of every member registered on the system.
+	 * 
 	 * @return ArrayList containing member's names.
 	 */
 	public ArrayList<String> getMembers() {
@@ -334,7 +354,9 @@ public class Database {
 
 	/**
 	 * Removes the book with the given ISBN
-	 * @param isbn ISBN of book to remove.
+	 * 
+	 * @param isbn
+	 *            ISBN of book to remove.
 	 */
 	public void removeBook(int isbn) {
 		try {
@@ -370,7 +392,9 @@ public class Database {
 
 	/**
 	 * Returns the loan with the given ID.
-	 * @param loanID ID of loan to return.
+	 * 
+	 * @param loanID
+	 *            ID of loan to return.
 	 */
 	public void returnLoan(int loanID) {
 		try {
@@ -384,8 +408,11 @@ public class Database {
 
 	/**
 	 * Search the database for books that match the "value" string
-	 * @param value Value to search for.
-	 * @param j Table Model
+	 * 
+	 * @param value
+	 *            Value to search for.
+	 * @param j
+	 *            Table Model
 	 * @throws SQLException
 	 */
 	public void searchBooks(String value, DefaultTableModel j)
@@ -405,7 +432,9 @@ public class Database {
 
 	/**
 	 * Return the path to the image for the book with given ISBN
-	 * @param isbn ISBN of book to search for.
+	 * 
+	 * @param isbn
+	 *            ISBN of book to search for.
 	 * @return Image path
 	 * @throws SQLException
 	 */
@@ -420,6 +449,7 @@ public class Database {
 
 	/**
 	 * Returns the genres from the database.
+	 * 
 	 * @return List of genres.
 	 * @throws SQLException
 	 */
@@ -466,10 +496,27 @@ public class Database {
 			n = results.getString("Author");
 			e = results.getString("Title");
 			g = results.getString("Genre");
-
 			j.addRow(new Object[] { isbn, n, e, g });
+		}
+	}
+
+	public void viewOverDueLoans(DefaultTableModel j) throws SQLException,
+			ParseException {
+
+		ResultSet results = stmt
+				.executeQuery("Select LoanID, MemberID, ISBN, DueDate from Loan where DueDate < date()");
+
+		while (results.next()) {
+
+			g = results.getString("DueDate");
+			loanID = results.getInt("LoanID");
+			n = results.getString("MemberID");
+			isbn = results.getInt("ISBN");
+
+			j.addRow(new Object[] { loanID, n, g, isbn });
 
 		}
+
 	}
 
 	public void populateComboBox(DefaultComboBoxModel j) throws SQLException {
