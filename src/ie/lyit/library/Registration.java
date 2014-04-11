@@ -1,6 +1,7 @@
 package ie.lyit.library;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -8,21 +9,32 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
 import java.awt.Color;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
+
+import javax.swing.border.*;
 import javax.swing.JTable;
+import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 
 /**
  * The first window seen by the user after launching the application.
+ * @author Sean Morris - l00095752
+ *
  */
 public class Registration extends JFrame {
 	
 
 	private JPanel contentPane;
+	// Constant to indicate there are 3 houses
+	private final int NUM_OF_PICS = 3;
 	private JTable table;
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
@@ -43,6 +55,14 @@ public class Registration extends JFrame {
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
+				
+				try {
+					MemberScreen frame = new MemberScreen();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			}
 		});
 	}
@@ -63,8 +83,8 @@ public class Registration extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblHeader = new JLabel("");
-		lblHeader.setIcon(new ImageIcon(Registration.class.getResource("/images/header.png")));
-		lblHeader.setBounds(0, 0, 390, 60);
+		lblHeader.setIcon(new ImageIcon(MemberScreen.class.getResource("/images/header.png")));
+		lblHeader.setBounds(0, 0, 404, 60);
 		contentPane.add(lblHeader);
 		
 		JPanel pnlSeparator = new JPanel();
@@ -80,14 +100,11 @@ public class Registration extends JFrame {
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(txtUsername.getText().equals("") || txtPassword.getText().equals("") || txtComparePassword.getText().equals("")) {
-						throw new IllegalArgumentException("You must complete all fields!");
-					}
 					if (txtPassword.getText().equals(txtComparePassword.getText())) {
 						data.registerUser(txtUsername.getText(), txtPassword.getText());
 						Member newMember = new Member(txtUsername.getText());
 						JOptionPane.showMessageDialog(null, "Registration Successful!");
-						MainScreen frame = new MainScreen();
+						MemberScreen frame = new MemberScreen();
 						frame.setVisible(true);
 						dispose();
 					}
@@ -98,10 +115,6 @@ public class Registration extends JFrame {
 				} catch (SQLException e1) {
 
 					e1.printStackTrace();
-				}
-				
-				catch (IllegalArgumentException e2) {
-					JOptionPane.showMessageDialog(null, "Error: " +e2.getMessage());
 				}
 			}
 		});
@@ -126,7 +139,7 @@ public class Registration extends JFrame {
 		contentPane.add(txtUsername);
 		
 		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(46, 90, 102, 22);
+		lblUsername.setBounds(46, 90, 86, 15);
 		contentPane.add(lblUsername);
 		
 		JButton btnCancel = new JButton("Cancel");
